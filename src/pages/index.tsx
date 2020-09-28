@@ -2,6 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
+import 'twin.macro';
+
 import Layout from '../components/layout';
 
 import {
@@ -10,6 +12,7 @@ import {
   Experience,
   Home,
   Main,
+  Projects,
   Section,
   Skills,
 } from '../components';
@@ -31,7 +34,7 @@ const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
 
   return (
     <Layout location={location} data={author as ContentfulPerson}>
-      <div className="bg-white">
+      <div tw="bg-white">
         <Helmet title={siteTitle}>
           <html lang="en" />
           <meta
@@ -42,15 +45,20 @@ const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
         <Main>
           <Home id="home" tw="mt-64" author={author as ContentfulPerson} />
           <Divisor />
+
           <Experience id="experience" experiences={experiences} />
           <Divisor />
+
           <Education id="education" education={education} />
           <Divisor />
+
           <Skills id="skills" />
           <Divisor />
+          <Projects id="projects" />
+          <Divisor />
           <Section id="interests">
-            <h2 className="text-5xl">Interests</h2>
-            <ul className="list-disc list-inside">
+            <h2 tw="text-5xl">Interests</h2>
+            <ul tw="list-disc list-inside">
               {interests.map(({ interest }) => (
                 <li key={`${interest}-interest`}>{interest}</li>
               ))}
@@ -83,8 +91,8 @@ export const pageQuery = graphql`
       title
       image {
         fluid(
-          maxWidth: 400
-          maxHeight: 400
+          maxWidth: 192
+          maxHeight: 192
           resizingBehavior: FILL
           cropFocus: FACE
         ) {

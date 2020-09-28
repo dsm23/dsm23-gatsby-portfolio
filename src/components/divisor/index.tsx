@@ -34,7 +34,6 @@ const Divisor: FunctionComponent<HTMLAttributes<HTMLDivElement>> = props => {
 
   const intersection = useIntersection(animationContainer, {
     root: null,
-    // prevent top divisor from animating on load at scrollY 0
     rootMargin: '0px',
     threshold: 1,
   });
@@ -54,9 +53,8 @@ const Divisor: FunctionComponent<HTMLAttributes<HTMLDivElement>> = props => {
 
     if (autoplay) {
       anim.playSegments([startFrame, endFrame], true);
-
-      return () => anim.destroy(); // optional clean up for unmounting
     }
+    return () => anim.destroy(); // optional clean up for unmounting
   }, [autoplay]);
 
   return <div {...props} ref={animationContainer} />;

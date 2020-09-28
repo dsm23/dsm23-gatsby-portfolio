@@ -2,27 +2,27 @@
   {
     "name": "maxNumericValue",
     "expected": 3000,
-    "actual": 4591.469999999999,
+    "actual": 4295.567999999999,
     "values": [
-      4603.392,
-      4591.469999999999,
-      4596.978000000001
+      4606.9929999999995,
+      4295.567999999999,
+      4672.0154999999995
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "first-contentful-paint",
     "level": "error",
-    "url": "http://localhost:60858/index.html",
+    "url": "http://localhost:49600/index.html",
     "auditTitle": "First Contentful Paint",
     "auditDocumentationLink": "https://web.dev/first-contentful-paint/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.65,
+    "actual": 0.69,
     "values": [
-      0.65,
-      0.65,
+      0.66,
+      0.69,
       0.65
     ],
     "operator": ">=",
@@ -30,70 +30,87 @@
     "auditProperty": "performance",
     "auditId": "categories",
     "level": "error",
-    "url": "http://localhost:60858/index.html"
+    "url": "http://localhost:49600/index.html"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.88,
+    "actual": 0.89,
     "values": [
-      0.88,
-      0.88,
-      0.88
+      0.86,
+      0.89,
+      0.89
     ],
     "operator": ">=",
     "passed": false,
-    "auditProperty": "accessibility",
+    "auditProperty": "performance",
     "auditId": "categories",
     "level": "error",
-    "url": "http://localhost:60858/algolia/index.html"
+    "url": "http://localhost:49600/algolia/index.html"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.88,
+    "actual": 0.89,
     "values": [
-      0.88,
-      0.88,
-      0.88
+      0.89,
+      0.89,
+      0.86
     ],
     "operator": ">=",
     "passed": false,
-    "auditProperty": "accessibility",
+    "auditProperty": "performance",
     "auditId": "categories",
     "level": "error",
-    "url": "http://localhost:60858/angular/index.html"
+    "url": "http://localhost:49600/angular/index.html"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.88,
+    "actual": 0.89,
     "values": [
-      0.88,
-      0.88,
-      0.88
+      0.89,
+      0.86,
+      0.86
     ],
     "operator": ">=",
     "passed": false,
-    "auditProperty": "accessibility",
+    "auditProperty": "performance",
     "auditId": "categories",
     "level": "error",
-    "url": "http://localhost:60858/css/index.html"
+    "url": "http://localhost:49600/css/index.html"
+  },
+  {
+    "name": "maxNumericValue",
+    "expected": 3000,
+    "actual": 3088.7609999999995,
+    "values": [
+      3089.6355000000003,
+      3088.7609999999995,
+      3090.598000000001
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "first-contentful-paint",
+    "level": "error",
+    "url": "http://localhost:49600/firebase/index.html",
+    "auditTitle": "First Contentful Paint",
+    "auditDocumentationLink": "https://web.dev/first-contentful-paint/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.88,
+    "actual": 0.86,
     "values": [
-      0.88,
-      0.88,
-      0.88
+      0.86,
+      0.86,
+      0.86
     ],
     "operator": ">=",
     "passed": false,
-    "auditProperty": "accessibility",
+    "auditProperty": "performance",
     "auditId": "categories",
     "level": "error",
-    "url": "http://localhost:60858/firebase/index.html"
+    "url": "http://localhost:49600/firebase/index.html"
   }
 ]

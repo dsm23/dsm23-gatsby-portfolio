@@ -1,5 +1,7 @@
 import 'tailwindcss/dist/base.min.css';
+
 import 'typeface-inter';
+import './src/styles.css';
 
 export const onClientEntry = async () => {
   if (typeof IntersectionObserver === `undefined`) {

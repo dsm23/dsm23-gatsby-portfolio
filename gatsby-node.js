@@ -27,7 +27,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         const posts = result.data.allContentfulSkill.edges;
-        posts.forEach((post, index) => {
+        posts.forEach(post => {
           createPage({
             path: `/${post.node.slug}/`,
             component: pageTemplate,

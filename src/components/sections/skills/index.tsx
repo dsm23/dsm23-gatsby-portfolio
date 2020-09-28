@@ -1,18 +1,61 @@
-import React, { FunctionComponent, HTMLAttributes, SVGAttributes } from 'react';
+import React, {
+  FunctionComponent,
+  HTMLAttributes,
+  lazy,
+  Suspense,
+  SVGAttributes,
+} from 'react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
+
 import 'twin.macro';
 
-import * as ToolIcon from '@icons-pack/react-simple-icons';
+import {
+  Algolia,
+  Angular,
+  Css3,
+  Firebase,
+  Gatsby,
+  Html5,
+  Javascript,
+  Jest,
+  Kubernetes,
+  NextDotJs,
+  ReactJs,
+  Python,
+  Stripe,
+  Tailwindcss,
+  Typescript,
+  VueDotJs,
+} from '@icons-pack/react-simple-icons';
 
 import { Section } from '../../section';
 import { Query } from '../../../../graphql-types';
 import { IconWrapper } from '../../icon-wrapper';
 
+type Icon = typeof Html5;
+
 interface Icons {
-  [key: string]: FunctionComponent<
-    SVGAttributes<SVGSVGElement> & { size: number }
-  >;
+  [key: string]: Icon;
 }
+// coupling
+const ToolIcon: Icons = {
+  Algolia,
+  Angular,
+  Css3,
+  Firebase,
+  Gatsby,
+  Html5,
+  Javascript,
+  Jest,
+  Kubernetes,
+  NextDotJs,
+  ReactJs,
+  Python,
+  Stripe,
+  Tailwindcss,
+  Typescript,
+  VueDotJs,
+};
 
 const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
   ...props
@@ -40,7 +83,7 @@ const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
       <h2 tw="text-5xl">Skills</h2>
       <div tw="flex flex-wrap items-baseline">
         {skills.map(({ component, slug }) => {
-          let Component;
+          let Component: Icon | undefined;
 
           if (component) {
             Component = (ToolIcon as Icons)[component as string];

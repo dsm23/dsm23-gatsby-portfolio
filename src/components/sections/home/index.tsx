@@ -1,7 +1,7 @@
 import React, { FunctionComponent, HTMLAttributes } from 'react';
-import 'twin.macro';
-
 import { Codesandbox, Github } from '@icons-pack/react-simple-icons';
+
+import 'twin.macro';
 
 import { ContentfulPerson } from '../../../../graphql-types';
 

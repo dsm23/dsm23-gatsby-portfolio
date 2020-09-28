@@ -2,9 +2,11 @@ import React, { FunctionComponent, useState } from 'react';
 import Scrollspy from 'react-scrollspy';
 import { Link, PageRendererProps } from 'gatsby';
 import scrollTo from 'gatsby-plugin-smoothscroll';
+
 import 'twin.macro';
 
 import { SideNav } from '../sidenav';
+import { SideNavLink, SideNavSpan } from '../sidenav-link';
 
 import { ContentfulPerson } from '../../../graphql-types';
 
@@ -12,11 +14,16 @@ interface Props extends PageRendererProps {
   data: ContentfulPerson;
 }
 
-const items = ['home', 'experience', 'education', 'skills', 'interests'];
+const items = [
+  'home',
+  'experience',
+  'education',
+  'skills',
+  'projects',
+  'interests',
+];
 
 const Template: FunctionComponent<Props> = ({ children, data, location }) => {
-  let header;
-
   let rootPath = `/`;
   // if (typeof __PREFIX_PATHS__ !== `undefined` && __PREFIX_PATHS__) {
   //   rootPath = __PATH_PREFIX__ + `/`;
@@ -38,7 +45,8 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
       tw="block md:inline-flex md:flex-row md:ml-auto md:w-auto w-full lg:items-center md:items-start lg:h-auto lg:block text-gray-400"
     >
       {items.map(label => (
-        <button
+        <SideNavLink
+          as="button"
           key={`${label}-sidenav`}
           onClick={() => {
             scrollTo(`#${label}`);
@@ -47,24 +55,21 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
           className="group"
           tw="flex items-center justify-start lg:justify-center uppercase w-full px-3 py-2 rounded hover:(bg-gray-900 text-white) focus:outline-none"
         >
-          <span tw="px-2 py-px font-medium rounded group-focus:(bg-yellow-500 text-gray-900)">
-            {label}
-          </span>
-        </button>
+          <SideNavSpan tw="px-1 py-px">{label}</SideNavSpan>
+        </SideNavLink>
       ))}
     </Scrollspy>
   ) : (
     items.map(label => (
-      <Link
+      <SideNavLink
+        as={Link}
         key={`${label}-sidenav`}
         to={`/#${label}`}
         className="group"
         tw="flex items-center justify-start lg:justify-center uppercase w-full px-3 py-2 rounded hover:(bg-gray-900 text-white) focus:outline-none"
       >
-        <span tw="px-2 py-px font-medium rounded group-focus:bg-yellow-500 group-focus:text-gray-900 text-gray-400 h-full">
-          {label}
-        </span>
-      </Link>
+        <SideNavSpan tw="px-1 py-px">{label}</SideNavSpan>
+      </SideNavLink>
     ))
   );
 

@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+
 import 'twin.macro';
 
 const SectionHeader: FunctionComponent = ({ children }) => (

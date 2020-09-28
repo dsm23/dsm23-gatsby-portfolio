@@ -39,11 +39,12 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-graphql-codegen',
     'gatsby-plugin-netlify',
-    'gatsby-plugin-emotion',
+    'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-smoothscroll',
+    'gatsby-plugin-postcss',
     'gatsby-plugin-typescript',
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',

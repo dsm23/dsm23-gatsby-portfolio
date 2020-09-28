@@ -113,8 +113,8 @@ export const pageQuery = graphql`
     contentfulPerson {
       image {
         fluid(
-          maxWidth: 400
-          maxHeight: 400
+          maxWidth: 192
+          maxHeight: 192
           resizingBehavior: FILL
           cropFocus: FACE
         ) {

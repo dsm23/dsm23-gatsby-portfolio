@@ -13,6 +13,8 @@ import { Main } from '../components';
 
 import { Query, ContentfulPerson } from '../../graphql-types';
 
+type Squares = (null | 'X' | 'O')[];
+
 const Square: FunctionComponent<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
   onClick,
@@ -23,8 +25,13 @@ const Square: FunctionComponent<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   </button>
 );
 
-const Board = ({ onClick, squares, ...props }) => {
-  const renderSquare = i => {
+const Board: FunctionComponent<
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> & {
+    squares: Squares;
+    onClick: (arg0: number) => void;
+  }
+> = ({ onClick, squares, ...props }) => {
+  const renderSquare = (i: number) => {
     return (
       <Square
         onClick={() => onClick(i)}
@@ -51,10 +58,10 @@ const Board = ({ onClick, squares, ...props }) => {
   );
 };
 
-const Game = props => {
+const Game = () => {
   const [state, setState] = useState<{
     history: {
-      squares: (null | 'X' | 'O')[];
+      squares: Squares;
     }[];
     stepNumber: number;
     xIsNext: boolean;
@@ -68,7 +75,7 @@ const Game = props => {
     xIsNext: true,
   });
 
-  const handleClick = i => {
+  const handleClick = (i: number) => {
     const history = state.history.slice(0, state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -131,7 +138,7 @@ const Game = props => {
   );
 };
 
-function calculateWinner(squares) {
+function calculateWinner(squares: Squares) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -193,19 +200,12 @@ export const pageQuery = graphql`
       name
       image {
         fluid(
-          maxWidth: 400
-          maxHeight: 400
+          maxWidth: 192
+          maxHeight: 192
           resizingBehavior: FILL
           cropFocus: FACE
         ) {
-          # ...GatsbyContentfulFluid_withWebp
-          base64
-          aspectRatio
-          src
-          srcSet
-          srcWebp
-          srcSetWebp
-          sizes
+          ...GatsbyContentfulFluid_withWebp
         }
       }
     }

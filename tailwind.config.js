@@ -1,7 +1,19 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  // purge: ['./src/**/*.html', './src/**/*.[jt]s?(x)'],
+  future: {
+    purgeLayersByDefault: true,
+  },
+  // purge: {
+  //   mode: 'all',
+  //   layers: ['components', 'utilities'],
+  //   content: ['./src/**/*.html', './src/**/*.[jt]s?(x)'],
+
+  //   // These options are passed through directly to PurgeCSS
+  //   options: {
+  //     whitelist: ['text-white', 'bg-teal-700'],
+  //   },
+  // },
   theme: {
     extend: {
       fontFamily: {

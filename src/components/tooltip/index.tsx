@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent, ReactNode } from 'react';
 import tw, { styled, theme } from 'twin.macro';
-import { keyframes } from '@emotion/core';
+import { keyframes } from 'styled-components';
 
 import { Manager, Reference, Popper, PopperChildrenProps } from 'react-popper';
 
@@ -16,12 +16,10 @@ export const fadeIn = keyframes`
   from { opacity: 0; }
   to   { opacity: 1; }
 `;
-export const PoppersContainer = styled('div')([
-  tw`z-50 opacity-0`,
-  {
-    animation: `${fadeIn} 0.3s ease-in 0.5s forwards`,
-  },
-]);
+export const PoppersContainer = styled('div')`
+  ${tw`z-50 opacity-0`}
+  animation: ${fadeIn} 0.3s ease-in 0.5s forwards;
+`;
 
 export const Arrow = styled('div')`
   ${tw`absolute w-12 h-12`}

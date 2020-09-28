@@ -6253,7 +6253,7 @@ export type NoughtsAndCrossesQueryQueryVariables = Exact<{ [key: string]: never;
 
 export type NoughtsAndCrossesQueryQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, contentfulPerson?: Maybe<(
     Pick<ContentfulPerson, 'name'>
-    & { image?: Maybe<{ fluid?: Maybe<Pick<ContentfulFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>> }> }
+    & { image?: Maybe<{ fluid?: Maybe<GatsbyContentfulFluid_WithWebpFragment> }> }
   )> };
 
 export type PageBySlugQueryVariables = Exact<{
