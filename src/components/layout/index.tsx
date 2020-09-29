@@ -68,19 +68,19 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
         className="group"
         tw="flex items-center justify-start lg:justify-center uppercase w-full px-3 py-2 rounded hover:(bg-gray-900 text-white) focus:outline-none"
       >
-        <SideNavSpan tw="px-1 py-px">{label}</SideNavSpan>
+        <SideNavSpan tw="px-1 py-px text-gray-400">{label}</SideNavSpan>
       </SideNavLink>
     ))
   );
 
   return (
-    <div tw="flex flex-col lg:flex-row font-sans">
+    <div tw="flex flex-col lg:flex-row font-sans w-full">
       <header>
         <SideNav data={data} open={open} onToggle={handleToggle}>
           {renderSidenav}
         </SideNav>
       </header>
-      <div tw="mt-20 lg:ml-64 lg:mt-auto">{children}</div>
+      <div tw="mt-20 lg:ml-64 lg:mt-auto w-full">{children}</div>
     </div>
   );
 };

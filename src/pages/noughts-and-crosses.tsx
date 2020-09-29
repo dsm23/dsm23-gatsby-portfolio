@@ -6,8 +6,9 @@ import React, {
 import { graphql, PageRendererProps } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import 'twin.macro';
-
+import { Anchor } from '../components/anchor';
 import Layout from '../components/layout';
+import { GoBack, StyledLink } from '../components/styled-go-back';
 
 import { Main } from '../components';
 
@@ -20,7 +21,7 @@ const Square: FunctionComponent<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   onClick,
   ...props
 }) => (
-  <button {...props} tw="w-1/3 h-10 border" onClick={onClick}>
+  <button {...props} tw="w-full h-20 md:h-40 border" onClick={onClick}>
     {children}
   </button>
 );
@@ -37,6 +38,7 @@ const Board: FunctionComponent<
         onClick={() => onClick(i)}
         aria-label={`game board, position: ${i % 3} ${Math.floor(i / 3)}`}
         role="button"
+        tw="w-1/3"
       >
         {squares[i]}
       </Square>
@@ -44,7 +46,7 @@ const Board: FunctionComponent<
   };
 
   return (
-    <div tw="flex flex-wrap">
+    <div tw="flex flex-wrap w-full">
       {renderSquare(0)}
       {renderSquare(1)}
       {renderSquare(2)}
@@ -123,18 +125,18 @@ const Game = () => {
   }
 
   return (
-    <div>
-      <div>
+    <>
+      <div tw="w-full">
         <Board
           squares={current.squares}
           onClick={(i: number) => handleClick(i)}
         />
       </div>
-      <div className="game-info">
+      <div>
         <div>{status}</div>
         <ol>{moves}</ol>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -168,21 +170,33 @@ const NoughtsAndCrosses: FunctionComponent<Props> = ({ data, location }) => {
 
   return (
     <Layout location={location} data={author as ContentfulPerson}>
-      <div tw="bg-white">
-        <Helmet title={siteTitle}>
-          <html lang="en" />
-          <meta
-            name="description"
-            content="The calculator project in David Murdoch's portfolio"
-          />
-        </Helmet>
-        <Main>
-          <h1>
-            Noughts and Crosses from https://reactjs.org/tutorial/tutorial.html
-          </h1>
-          <Game />
-        </Main>
-      </div>
+      <Helmet title={siteTitle}>
+        <html lang="en" />
+        <meta
+          name="description"
+          content="The calculator project in David Murdoch's portfolio"
+        />
+      </Helmet>
+      <Main tw="px-6 py-8 w-full">
+        <StyledLink to="/#projects" className="group">
+          <div className="group">
+            <GoBack aria-label="Go Back" />
+          </div>
+        </StyledLink>
+        <h1 tw="text-4xl text-teal-600 tracking-widest uppercase">
+          Noughts and Crosses
+        </h1>
+
+        <p tw="text-gray-900">
+          The tutorial example from{' '}
+          <Anchor href="https://reactjs.org/tutorial/tutorial.html">
+            reactjs docs
+          </Anchor>{' '}
+          re-styled and with types
+        </p>
+
+        <Game />
+      </Main>
     </Layout>
   );
 };

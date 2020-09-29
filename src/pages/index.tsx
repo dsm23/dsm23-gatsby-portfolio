@@ -34,38 +34,36 @@ const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
 
   return (
     <Layout location={location} data={author as ContentfulPerson}>
-      <div tw="bg-white">
-        <Helmet title={siteTitle}>
-          <html lang="en" />
-          <meta
-            name="description"
-            content="The react version of David Murdoch's portfolio built with tailwind and gatsby"
-          />
-        </Helmet>
-        <Main>
-          <Home id="home" tw="mt-64" author={author as ContentfulPerson} />
-          <Divisor />
+      <Helmet title={siteTitle}>
+        <html lang="en" />
+        <meta
+          name="description"
+          content="The react version of David Murdoch's portfolio built with tailwind and gatsby"
+        />
+      </Helmet>
+      <Main>
+        <Home id="home" tw="mt-64" author={author as ContentfulPerson} />
+        <Divisor />
 
-          <Experience id="experience" experiences={experiences} />
-          <Divisor />
+        <Experience id="experience" experiences={experiences} />
+        <Divisor />
 
-          <Education id="education" education={education} />
-          <Divisor />
+        <Education id="education" education={education} />
+        <Divisor />
 
-          <Skills id="skills" />
-          <Divisor />
-          <Projects id="projects" />
-          <Divisor />
-          <Section id="interests">
-            <h2 tw="text-5xl">Interests</h2>
-            <ul tw="list-disc list-inside">
-              {interests.map(({ interest }) => (
-                <li key={`${interest}-interest`}>{interest}</li>
-              ))}
-            </ul>
-          </Section>
-        </Main>
-      </div>
+        <Skills id="skills" />
+        <Divisor />
+        <Projects id="projects" />
+        <Divisor />
+        <Section id="interests">
+          <h2 tw="text-5xl">Interests</h2>
+          <ul tw="list-disc list-inside">
+            {interests.map(({ interest }) => (
+              <li key={`${interest}-interest`}>{interest}</li>
+            ))}
+          </ul>
+        </Section>
+      </Main>
     </Layout>
   );
 };

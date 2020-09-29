@@ -17,6 +17,11 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: 'This portfolio',
+    to: 'https://github.com/dsm23/dsm23-gatsby-portfolio',
+    description: 'The GitHub link to the source code of this portfolio',
+  },
+  {
     title: 'IMH website',
     to: 'https://imh-gatsby.netlify.app/',
     description:
@@ -35,7 +40,7 @@ const Projects: FunctionComponent<HTMLAttributes<HTMLElement>> = props => (
     <h2 tw="text-5xl">Projects</h2>
     <div tw="flex flex-wrap">
       {projects.map(({ title, to, description }) => (
-        <div tw="w-full sm:w-1/2">
+        <div tw="w-full sm:w-1/2 md:w-1/3">
           <div tw="relative pb-5/6">
             <Help tw="absolute h-full w-full object-cover rounded-lg shadow-md" />
           </div>

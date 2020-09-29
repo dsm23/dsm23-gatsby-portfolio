@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, Link, PageRendererProps } from 'gatsby';
-import tw, { styled } from 'twin.macro';
+import { graphql, PageRendererProps } from 'gatsby';
 import {
   documentToReactComponents,
   Options,
@@ -11,13 +10,13 @@ import { Anchor } from '../components/anchor';
 import Layout from '../components/layout';
 import { Main } from '../components/main';
 import { SEO } from '../components/seo';
+import { GoBack, StyledLink } from '../components/styled-go-back';
 import { ContentfulPerson, Query } from '../../graphql-types';
 
 import 'twin.macro';
 
 import { EmptyStar } from '../components/svgs/empty-star';
 import { FilledStar } from '../components/svgs/filled-star';
-import { GoBack } from '../components/svgs';
 
 interface Props extends PageRendererProps {
   data: Query;
@@ -54,10 +53,6 @@ const options: Options = {
   // renderText: text => text.replace('!', '?'),
 };
 
-const StyledGoBack = styled(GoBack)({
-  path: tw`fill-current transition transform duration-500 ease-in-out text-teal-700 group-hover:text-white`,
-});
-
 const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
   const json = data?.contentfulSkill?.content?.json ?? {};
   const skillName = data?.contentfulSkill?.skillName ?? '';
@@ -69,15 +64,11 @@ const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
     <Layout location={location} data={author as ContentfulPerson}>
       <SEO description="Skill page" title={skillName} />
       <Main tw="px-6 py-8">
-        <Link
-          to="/#skills"
-          className="group"
-          tw="transition transform duration-500 ease-in-out w-10 h-10 flex items-center justify-center rounded-full outline-none bg-gray-100 hover:(bg-teal-900 scale-125) focus:(border-2 border-yellow-500)"
-        >
+        <StyledLink to="/#skills" className="group">
           <div className="group">
-            <StyledGoBack aria-label="Go Back" />
+            <GoBack aria-label="Go Back" />
           </div>
-        </Link>
+        </StyledLink>
 
         <h1 tw="text-4xl">
           <span tw="text-teal-600 tracking-widest">SKILL:</span> {skillName}
