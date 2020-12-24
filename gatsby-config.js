@@ -37,7 +37,6 @@ module.exports = {
   plugins: [
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-graphql-codegen',
     'gatsby-plugin-netlify',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
@@ -46,6 +45,12 @@ module.exports = {
     'gatsby-plugin-smoothscroll',
     'gatsby-plugin-postcss',
     'gatsby-plugin-typescript',
+    {
+      resolve: 'gatsby-plugin-graphql-codegen',
+      options: {
+        fileName: 'graphql-types.ts',
+      },
+    },
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',
       options: {

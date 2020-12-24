@@ -41,7 +41,7 @@ const options: Options = {
     // [BLOCKS.EMBEDDED_ASSET]: (node: any) => (
     //   <Image
     //     tw="text-center shadow-lg mx-auto max-w-screen-md"
-    //     contentfulId={node?.data?.target?.sys?.contentful_id}
+    //     contentfulId={node?.data?.target?.sys?.id}
     //   />
     // ),
     [INLINES.HYPERLINK]: (node, children) => (
@@ -70,13 +70,13 @@ const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
           </div>
         </StyledLink>
 
-        <h1 tw="text-4xl">
-          <span tw="text-teal-600 tracking-widest">SKILL:</span> {skillName}
+        <h1 tw="text-4xl mt-3">
+          <span tw="text-green-600 tracking-widest">SKILL:</span> {skillName}
         </h1>
         <div tw="mb-4">{documentToReactComponents(json, options)}</div>
 
         <div tw="flex">
-          <h2 tw="text-teal-600 tracking-widest">PROFICIENCY:</h2>
+          <h2 tw="text-green-600 tracking-widest">PROFICIENCY:</h2>
           {Array.from({ length: rating }, (_, i) => i).map(num => (
             <FilledStar key={`${num}-${skillName}-filled`} />
           ))}
@@ -97,7 +97,6 @@ export const pageQuery = graphql`
       skillName
       rating
       content {
-        content
         json
       }
     }

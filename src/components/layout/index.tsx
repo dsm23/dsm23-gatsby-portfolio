@@ -40,7 +40,7 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
   const renderSidenav = isIndexPage ? (
     <Scrollspy
       items={items}
-      currentClassName="text-white bg-teal-700"
+      currentClassName="text-white bg-green-700"
       componentTag="div"
       tw="block md:inline-flex md:flex-row md:ml-auto md:w-auto w-full lg:items-center md:items-start lg:h-auto lg:block text-gray-400"
     >

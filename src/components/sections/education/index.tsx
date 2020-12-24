@@ -20,7 +20,7 @@ const Education: FunctionComponent<Props> = ({ education, ...props }) => {
           <h3 tw="text-3xl">{schoolName}</h3>
           {description && <p tw="text-gray-900">{description?.description}</p>}
 
-          <div tw="font-semibold text-teal-900">
+          <div tw="font-semibold text-green-900">
             {formatYears(startDate as string, endDate as string)}
           </div>
         </div>

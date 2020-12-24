@@ -26,7 +26,7 @@ const Home: FunctionComponent<Props> = ({ author, ...props }) => {
   return (
     <Section {...props}>
       <SectionHeader>
-        {firstName} <span tw="text-teal-900">{lastName}</span>
+        {firstName} <span tw="text-green-900">{lastName}</span>
       </SectionHeader>
       <address>
         London-based · {phone} ·{' '}
@@ -37,7 +37,7 @@ const Home: FunctionComponent<Props> = ({ author, ...props }) => {
         <a
           href={github}
           aria-label="GitHub"
-          tw="transition transform duration-500 ease-in-out w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 hover:bg-teal-900 hover:scale-125"
+          tw="transition transform duration-500 ease-in-out w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 hover:bg-green-900 hover:scale-125"
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -46,7 +46,7 @@ const Home: FunctionComponent<Props> = ({ author, ...props }) => {
         <a
           href={codesandbox}
           aria-label="CodeSandbox"
-          tw="transition transform duration-500 ease-in-out w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 hover:bg-teal-900 hover:scale-125 ml-4"
+          tw="transition transform duration-500 ease-in-out w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 hover:bg-green-900 hover:scale-125 ml-4"
           rel="noopener noreferrer"
           target="_blank"
         >

@@ -1,5 +1,7 @@
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -25,6 +27,16 @@ export type Scalars = {
 
 
 
+
+export type BlurredOptions = {
+  /** Width of the generated low-res preview. Default is 20px */
+  width?: Maybe<Scalars['Int']>;
+  /**
+   * Force the output format for the low-res preview. Default is to use the same
+   * format as the input. You should rarely need to change this
+   */
+  toFormat?: Maybe<ImageFormat>;
+};
 
 export type BooleanQueryOperatorInput = {
   eq?: Maybe<Scalars['Boolean']>;
@@ -257,6 +269,7 @@ export type ContentfulAssetFieldsEnum =
   | 'title'
   | 'description'
   | 'node_locale'
+  | 'sys___type'
   | 'sys___revision'
   | 'fixed___base64'
   | 'fixed___tracedSVG'
@@ -369,10 +382,12 @@ export type ContentfulAssetSortInput = {
 };
 
 export type ContentfulAssetSys = {
+  type?: Maybe<Scalars['String']>;
   revision?: Maybe<Scalars['Int']>;
 };
 
 export type ContentfulAssetSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
   revision?: Maybe<IntQueryOperatorInput>;
 };
 
@@ -384,6 +399,7 @@ export type ContentfulContentType = Node & {
   name?: Maybe<Scalars['String']>;
   displayField?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  sys?: Maybe<ContentfulContentTypeSys>;
 };
 
 export type ContentfulContentTypeConnection = {
@@ -502,7 +518,8 @@ export type ContentfulContentTypeFieldsEnum =
   | 'internal___type'
   | 'name'
   | 'displayField'
-  | 'description';
+  | 'description'
+  | 'sys___type';
 
 export type ContentfulContentTypeFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
@@ -512,6 +529,7 @@ export type ContentfulContentTypeFilterInput = {
   name?: Maybe<StringQueryOperatorInput>;
   displayField?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulContentTypeSysFilterInput>;
 };
 
 export type ContentfulContentTypeGroupConnection = {
@@ -526,6 +544,14 @@ export type ContentfulContentTypeGroupConnection = {
 export type ContentfulContentTypeSortInput = {
   fields?: Maybe<Array<Maybe<ContentfulContentTypeFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type ContentfulContentTypeSys = {
+  type?: Maybe<Scalars['String']>;
+};
+
+export type ContentfulContentTypeSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ContentfulEducationSchool = Node & {
@@ -589,6 +615,7 @@ export type ContentfulEducationSchoolDescriptionTextNode = Node & {
   children: Array<Node>;
   internal: Internal;
   description?: Maybe<Scalars['String']>;
+  sys?: Maybe<ContentfulEducationSchoolDescriptionTextNodeSys>;
   childMarkdownRemark?: Maybe<MarkdownRemark>;
 };
 
@@ -707,6 +734,7 @@ export type ContentfulEducationSchoolDescriptionTextNodeFieldsEnum =
   | 'internal___owner'
   | 'internal___type'
   | 'description'
+  | 'sys___type'
   | 'childMarkdownRemark___id'
   | 'childMarkdownRemark___frontmatter___title'
   | 'childMarkdownRemark___excerpt'
@@ -767,6 +795,7 @@ export type ContentfulEducationSchoolDescriptionTextNodeFilterInput = {
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
   description?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulEducationSchoolDescriptionTextNodeSysFilterInput>;
   childMarkdownRemark?: Maybe<MarkdownRemarkFilterInput>;
 };
 
@@ -782,6 +811,14 @@ export type ContentfulEducationSchoolDescriptionTextNodeGroupConnection = {
 export type ContentfulEducationSchoolDescriptionTextNodeSortInput = {
   fields?: Maybe<Array<Maybe<ContentfulEducationSchoolDescriptionTextNodeFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type ContentfulEducationSchoolDescriptionTextNodeSys = {
+  type?: Maybe<Scalars['String']>;
+};
+
+export type ContentfulEducationSchoolDescriptionTextNodeSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ContentfulEducationSchoolEdge = {
@@ -919,6 +956,7 @@ export type ContentfulEducationSchoolFieldsEnum =
   | 'description___internal___owner'
   | 'description___internal___type'
   | 'description___description'
+  | 'description___sys___type'
   | 'description___childMarkdownRemark___id'
   | 'description___childMarkdownRemark___frontmatter___title'
   | 'description___childMarkdownRemark___excerpt'
@@ -952,11 +990,11 @@ export type ContentfulEducationSchoolFieldsEnum =
   | 'contentful_id'
   | 'createdAt'
   | 'updatedAt'
+  | 'sys___type'
   | 'sys___revision'
   | 'sys___contentType___sys___type'
   | 'sys___contentType___sys___linkType'
   | 'sys___contentType___sys___id'
-  | 'sys___contentType___sys___contentful_id'
   | 'node_locale'
   | 'childContentfulEducationSchoolDescriptionTextNode___id'
   | 'childContentfulEducationSchoolDescriptionTextNode___parent___id'
@@ -997,6 +1035,7 @@ export type ContentfulEducationSchoolFieldsEnum =
   | 'childContentfulEducationSchoolDescriptionTextNode___internal___owner'
   | 'childContentfulEducationSchoolDescriptionTextNode___internal___type'
   | 'childContentfulEducationSchoolDescriptionTextNode___description'
+  | 'childContentfulEducationSchoolDescriptionTextNode___sys___type'
   | 'childContentfulEducationSchoolDescriptionTextNode___childMarkdownRemark___id'
   | 'childContentfulEducationSchoolDescriptionTextNode___childMarkdownRemark___frontmatter___title'
   | 'childContentfulEducationSchoolDescriptionTextNode___childMarkdownRemark___excerpt'
@@ -1060,6 +1099,7 @@ export type ContentfulEducationSchoolSortInput = {
 };
 
 export type ContentfulEducationSchoolSys = {
+  type?: Maybe<Scalars['String']>;
   revision?: Maybe<Scalars['Int']>;
   contentType?: Maybe<ContentfulEducationSchoolSysContentType>;
 };
@@ -1076,17 +1116,16 @@ export type ContentfulEducationSchoolSysContentTypeSys = {
   type?: Maybe<Scalars['String']>;
   linkType?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
-  contentful_id?: Maybe<Scalars['String']>;
 };
 
 export type ContentfulEducationSchoolSysContentTypeSysFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   linkType?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
-  contentful_id?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ContentfulEducationSchoolSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
   revision?: Maybe<IntQueryOperatorInput>;
   contentType?: Maybe<ContentfulEducationSchoolSysContentTypeFilterInput>;
 };
@@ -1153,6 +1192,7 @@ export type ContentfulExperienceCompanyDescriptionTextNode = Node & {
   children: Array<Node>;
   internal: Internal;
   description?: Maybe<Scalars['String']>;
+  sys?: Maybe<ContentfulExperienceCompanyDescriptionTextNodeSys>;
   childMarkdownRemark?: Maybe<MarkdownRemark>;
 };
 
@@ -1271,6 +1311,7 @@ export type ContentfulExperienceCompanyDescriptionTextNodeFieldsEnum =
   | 'internal___owner'
   | 'internal___type'
   | 'description'
+  | 'sys___type'
   | 'childMarkdownRemark___id'
   | 'childMarkdownRemark___frontmatter___title'
   | 'childMarkdownRemark___excerpt'
@@ -1331,6 +1372,7 @@ export type ContentfulExperienceCompanyDescriptionTextNodeFilterInput = {
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
   description?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulExperienceCompanyDescriptionTextNodeSysFilterInput>;
   childMarkdownRemark?: Maybe<MarkdownRemarkFilterInput>;
 };
 
@@ -1346,6 +1388,14 @@ export type ContentfulExperienceCompanyDescriptionTextNodeGroupConnection = {
 export type ContentfulExperienceCompanyDescriptionTextNodeSortInput = {
   fields?: Maybe<Array<Maybe<ContentfulExperienceCompanyDescriptionTextNodeFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type ContentfulExperienceCompanyDescriptionTextNodeSys = {
+  type?: Maybe<Scalars['String']>;
+};
+
+export type ContentfulExperienceCompanyDescriptionTextNodeSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ContentfulExperienceCompanyEdge = {
@@ -1484,6 +1534,7 @@ export type ContentfulExperienceCompanyFieldsEnum =
   | 'description___internal___owner'
   | 'description___internal___type'
   | 'description___description'
+  | 'description___sys___type'
   | 'description___childMarkdownRemark___id'
   | 'description___childMarkdownRemark___frontmatter___title'
   | 'description___childMarkdownRemark___excerpt'
@@ -1517,11 +1568,11 @@ export type ContentfulExperienceCompanyFieldsEnum =
   | 'contentful_id'
   | 'createdAt'
   | 'updatedAt'
+  | 'sys___type'
   | 'sys___revision'
   | 'sys___contentType___sys___type'
   | 'sys___contentType___sys___linkType'
   | 'sys___contentType___sys___id'
-  | 'sys___contentType___sys___contentful_id'
   | 'node_locale'
   | 'childContentfulExperienceCompanyDescriptionTextNode___id'
   | 'childContentfulExperienceCompanyDescriptionTextNode___parent___id'
@@ -1562,6 +1613,7 @@ export type ContentfulExperienceCompanyFieldsEnum =
   | 'childContentfulExperienceCompanyDescriptionTextNode___internal___owner'
   | 'childContentfulExperienceCompanyDescriptionTextNode___internal___type'
   | 'childContentfulExperienceCompanyDescriptionTextNode___description'
+  | 'childContentfulExperienceCompanyDescriptionTextNode___sys___type'
   | 'childContentfulExperienceCompanyDescriptionTextNode___childMarkdownRemark___id'
   | 'childContentfulExperienceCompanyDescriptionTextNode___childMarkdownRemark___frontmatter___title'
   | 'childContentfulExperienceCompanyDescriptionTextNode___childMarkdownRemark___excerpt'
@@ -1626,6 +1678,7 @@ export type ContentfulExperienceCompanySortInput = {
 };
 
 export type ContentfulExperienceCompanySys = {
+  type?: Maybe<Scalars['String']>;
   revision?: Maybe<Scalars['Int']>;
   contentType?: Maybe<ContentfulExperienceCompanySysContentType>;
 };
@@ -1642,17 +1695,16 @@ export type ContentfulExperienceCompanySysContentTypeSys = {
   type?: Maybe<Scalars['String']>;
   linkType?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
-  contentful_id?: Maybe<Scalars['String']>;
 };
 
 export type ContentfulExperienceCompanySysContentTypeSysFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   linkType?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
-  contentful_id?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ContentfulExperienceCompanySysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
   revision?: Maybe<IntQueryOperatorInput>;
   contentType?: Maybe<ContentfulExperienceCompanySysContentTypeFilterInput>;
 };
@@ -1871,11 +1923,11 @@ export type ContentfulInterestsFieldsEnum =
   | 'contentful_id'
   | 'createdAt'
   | 'updatedAt'
+  | 'sys___type'
   | 'sys___revision'
   | 'sys___contentType___sys___type'
   | 'sys___contentType___sys___linkType'
   | 'sys___contentType___sys___id'
-  | 'sys___contentType___sys___contentful_id'
   | 'node_locale';
 
 export type ContentfulInterestsFilterInput = {
@@ -1907,6 +1959,7 @@ export type ContentfulInterestsSortInput = {
 };
 
 export type ContentfulInterestsSys = {
+  type?: Maybe<Scalars['String']>;
   revision?: Maybe<Scalars['Int']>;
   contentType?: Maybe<ContentfulInterestsSysContentType>;
 };
@@ -1923,17 +1976,16 @@ export type ContentfulInterestsSysContentTypeSys = {
   type?: Maybe<Scalars['String']>;
   linkType?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
-  contentful_id?: Maybe<Scalars['String']>;
 };
 
 export type ContentfulInterestsSysContentTypeSysFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   linkType?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
-  contentful_id?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ContentfulInterestsSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
   revision?: Maybe<IntQueryOperatorInput>;
   contentType?: Maybe<ContentfulInterestsSysContentTypeFilterInput>;
 };
@@ -2151,6 +2203,7 @@ export type ContentfulPersonFieldsEnum =
   | 'image___title'
   | 'image___description'
   | 'image___node_locale'
+  | 'image___sys___type'
   | 'image___sys___revision'
   | 'image___fixed___base64'
   | 'image___fixed___tracedSVG'
@@ -2231,6 +2284,7 @@ export type ContentfulPersonFieldsEnum =
   | 'shortBio___internal___owner'
   | 'shortBio___internal___type'
   | 'shortBio___shortBio'
+  | 'shortBio___sys___type'
   | 'shortBio___childMarkdownRemark___id'
   | 'shortBio___childMarkdownRemark___frontmatter___title'
   | 'shortBio___childMarkdownRemark___excerpt'
@@ -2264,11 +2318,11 @@ export type ContentfulPersonFieldsEnum =
   | 'contentful_id'
   | 'createdAt'
   | 'updatedAt'
+  | 'sys___type'
   | 'sys___revision'
   | 'sys___contentType___sys___type'
   | 'sys___contentType___sys___linkType'
   | 'sys___contentType___sys___id'
-  | 'sys___contentType___sys___contentful_id'
   | 'node_locale'
   | 'childContentfulPersonShortBioTextNode___id'
   | 'childContentfulPersonShortBioTextNode___parent___id'
@@ -2309,6 +2363,7 @@ export type ContentfulPersonFieldsEnum =
   | 'childContentfulPersonShortBioTextNode___internal___owner'
   | 'childContentfulPersonShortBioTextNode___internal___type'
   | 'childContentfulPersonShortBioTextNode___shortBio'
+  | 'childContentfulPersonShortBioTextNode___sys___type'
   | 'childContentfulPersonShortBioTextNode___childMarkdownRemark___id'
   | 'childContentfulPersonShortBioTextNode___childMarkdownRemark___frontmatter___title'
   | 'childContentfulPersonShortBioTextNode___childMarkdownRemark___excerpt'
@@ -2379,6 +2434,7 @@ export type ContentfulPersonShortBioTextNode = Node & {
   children: Array<Node>;
   internal: Internal;
   shortBio?: Maybe<Scalars['String']>;
+  sys?: Maybe<ContentfulPersonShortBioTextNodeSys>;
   childMarkdownRemark?: Maybe<MarkdownRemark>;
 };
 
@@ -2497,6 +2553,7 @@ export type ContentfulPersonShortBioTextNodeFieldsEnum =
   | 'internal___owner'
   | 'internal___type'
   | 'shortBio'
+  | 'sys___type'
   | 'childMarkdownRemark___id'
   | 'childMarkdownRemark___frontmatter___title'
   | 'childMarkdownRemark___excerpt'
@@ -2557,6 +2614,7 @@ export type ContentfulPersonShortBioTextNodeFilterInput = {
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
   shortBio?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulPersonShortBioTextNodeSysFilterInput>;
   childMarkdownRemark?: Maybe<MarkdownRemarkFilterInput>;
 };
 
@@ -2574,12 +2632,21 @@ export type ContentfulPersonShortBioTextNodeSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type ContentfulPersonShortBioTextNodeSys = {
+  type?: Maybe<Scalars['String']>;
+};
+
+export type ContentfulPersonShortBioTextNodeSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+};
+
 export type ContentfulPersonSortInput = {
   fields?: Maybe<Array<Maybe<ContentfulPersonFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
 export type ContentfulPersonSys = {
+  type?: Maybe<Scalars['String']>;
   revision?: Maybe<Scalars['Int']>;
   contentType?: Maybe<ContentfulPersonSysContentType>;
 };
@@ -2596,17 +2663,16 @@ export type ContentfulPersonSysContentTypeSys = {
   type?: Maybe<Scalars['String']>;
   linkType?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
-  contentful_id?: Maybe<Scalars['String']>;
 };
 
 export type ContentfulPersonSysContentTypeSysFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   linkType?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
-  contentful_id?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ContentfulPersonSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
   revision?: Maybe<IntQueryOperatorInput>;
   contentType?: Maybe<ContentfulPersonSysContentTypeFilterInput>;
 };
@@ -2740,6 +2806,7 @@ export type ContentfulSkillContentRichTextNode = Node & {
   content?: Maybe<Scalars['String']>;
   /** @deprecated This field is deprecated, please use 'json' instead. */
   nodeType?: Maybe<Scalars['String']>;
+  sys?: Maybe<ContentfulSkillContentRichTextNodeSys>;
   json?: Maybe<Scalars['JSON']>;
 };
 
@@ -2859,6 +2926,7 @@ export type ContentfulSkillContentRichTextNodeFieldsEnum =
   | 'internal___type'
   | 'content'
   | 'nodeType'
+  | 'sys___type'
   | 'json';
 
 export type ContentfulSkillContentRichTextNodeFilterInput = {
@@ -2868,6 +2936,7 @@ export type ContentfulSkillContentRichTextNodeFilterInput = {
   internal?: Maybe<InternalFilterInput>;
   content?: Maybe<StringQueryOperatorInput>;
   nodeType?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulSkillContentRichTextNodeSysFilterInput>;
   json?: Maybe<JsonQueryOperatorInput>;
 };
 
@@ -2883,6 +2952,14 @@ export type ContentfulSkillContentRichTextNodeGroupConnection = {
 export type ContentfulSkillContentRichTextNodeSortInput = {
   fields?: Maybe<Array<Maybe<ContentfulSkillContentRichTextNodeFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type ContentfulSkillContentRichTextNodeSys = {
+  type?: Maybe<Scalars['String']>;
+};
+
+export type ContentfulSkillContentRichTextNodeSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ContentfulSkillEdge = {
@@ -3023,16 +3100,17 @@ export type ContentfulSkillFieldsEnum =
   | 'content___internal___type'
   | 'content___content'
   | 'content___nodeType'
+  | 'content___sys___type'
   | 'content___json'
   | 'spaceId'
   | 'contentful_id'
   | 'createdAt'
   | 'updatedAt'
+  | 'sys___type'
   | 'sys___revision'
   | 'sys___contentType___sys___type'
   | 'sys___contentType___sys___linkType'
   | 'sys___contentType___sys___id'
-  | 'sys___contentType___sys___contentful_id'
   | 'node_locale'
   | 'childContentfulSkillContentRichTextNode___id'
   | 'childContentfulSkillContentRichTextNode___parent___id'
@@ -3074,6 +3152,7 @@ export type ContentfulSkillFieldsEnum =
   | 'childContentfulSkillContentRichTextNode___internal___type'
   | 'childContentfulSkillContentRichTextNode___content'
   | 'childContentfulSkillContentRichTextNode___nodeType'
+  | 'childContentfulSkillContentRichTextNode___sys___type'
   | 'childContentfulSkillContentRichTextNode___json';
 
 export type ContentfulSkillFilterInput = {
@@ -3111,6 +3190,7 @@ export type ContentfulSkillSortInput = {
 };
 
 export type ContentfulSkillSys = {
+  type?: Maybe<Scalars['String']>;
   revision?: Maybe<Scalars['Int']>;
   contentType?: Maybe<ContentfulSkillSysContentType>;
 };
@@ -3127,17 +3207,16 @@ export type ContentfulSkillSysContentTypeSys = {
   type?: Maybe<Scalars['String']>;
   linkType?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
-  contentful_id?: Maybe<Scalars['String']>;
 };
 
 export type ContentfulSkillSysContentTypeSysFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   linkType?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
-  contentful_id?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ContentfulSkillSysFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
   revision?: Maybe<IntQueryOperatorInput>;
   contentType?: Maybe<ContentfulSkillSysContentTypeFilterInput>;
 };
@@ -3654,6 +3733,7 @@ export type FileFieldsEnum =
   | 'childImageSharp___sizes___originalName'
   | 'childImageSharp___sizes___presentationWidth'
   | 'childImageSharp___sizes___presentationHeight'
+  | 'childImageSharp___gatsbyImageData'
   | 'childImageSharp___original___width'
   | 'childImageSharp___original___height'
   | 'childImageSharp___original___src'
@@ -3874,9 +3954,21 @@ export type ImageFit =
 
 export type ImageFormat = 
   | 'NO_CHANGE'
+  | 'AUTO'
   | 'JPG'
   | 'PNG'
   | 'WEBP';
+
+export type ImageLayout = 
+  | 'FIXED'
+  | 'FLUID'
+  | 'CONSTRAINED';
+
+export type ImagePlaceholder = 
+  | 'DOMINANT_COLOR'
+  | 'TRACED_SVG'
+  | 'BLURRED'
+  | 'NONE';
 
 export type ImageResizingBehavior = 
   | 'NO_CHANGE'
@@ -3901,6 +3993,7 @@ export type ImageSharp = Node & {
   fluid?: Maybe<ImageSharpFluid>;
   /** @deprecated Sizes was deprecated in Gatsby v2. It's been renamed to "fluid" https://example.com/write-docs-and-fix-this-example-link */
   sizes?: Maybe<ImageSharpSizes>;
+  gatsbyImageData: Scalars['JSON'];
   original?: Maybe<ImageSharpOriginal>;
   resize?: Maybe<ImageSharpResize>;
   id: Scalars['ID'];
@@ -4006,6 +4099,27 @@ export type ImageSharpSizesArgs = {
 };
 
 
+export type ImageSharpGatsbyImageDataArgs = {
+  layout?: Maybe<ImageLayout>;
+  maxWidth?: Maybe<Scalars['Int']>;
+  maxHeight?: Maybe<Scalars['Int']>;
+  width?: Maybe<Scalars['Int']>;
+  height?: Maybe<Scalars['Int']>;
+  placeholder?: Maybe<ImagePlaceholder>;
+  blurredOptions?: Maybe<BlurredOptions>;
+  tracedSVGOptions?: Maybe<Potrace>;
+  formats?: Maybe<Array<Maybe<ImageFormat>>>;
+  outputPixelDensities?: Maybe<Array<Maybe<Scalars['Float']>>>;
+  sizes?: Maybe<Scalars['String']>;
+  quality?: Maybe<Scalars['Int']>;
+  jpgOptions?: Maybe<JpgOptions>;
+  pngOptions?: Maybe<PngOptions>;
+  webpOptions?: Maybe<WebPOptions>;
+  transformOptions?: Maybe<TransformOptions>;
+  background?: Maybe<Scalars['String']>;
+};
+
+
 export type ImageSharpResizeArgs = {
   width?: Maybe<Scalars['Int']>;
   height?: Maybe<Scalars['Int']>;
@@ -4100,6 +4214,7 @@ export type ImageSharpFieldsEnum =
   | 'sizes___originalName'
   | 'sizes___presentationWidth'
   | 'sizes___presentationHeight'
+  | 'gatsbyImageData'
   | 'original___width'
   | 'original___height'
   | 'original___src'
@@ -4201,6 +4316,7 @@ export type ImageSharpFilterInput = {
   resolutions?: Maybe<ImageSharpResolutionsFilterInput>;
   fluid?: Maybe<ImageSharpFluidFilterInput>;
   sizes?: Maybe<ImageSharpSizesFilterInput>;
+  gatsbyImageData?: Maybe<JsonQueryOperatorInput>;
   original?: Maybe<ImageSharpOriginalFilterInput>;
   resize?: Maybe<ImageSharpResizeFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -4396,6 +4512,11 @@ export type IntQueryOperatorInput = {
   lte?: Maybe<Scalars['Int']>;
   in?: Maybe<Array<Maybe<Scalars['Int']>>>;
   nin?: Maybe<Array<Maybe<Scalars['Int']>>>;
+};
+
+export type JpgOptions = {
+  quality?: Maybe<Scalars['Int']>;
+  progressive?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4690,6 +4811,11 @@ export type PageInfo = {
   totalCount: Scalars['Int'];
 };
 
+export type PngOptions = {
+  quality?: Maybe<Scalars['Int']>;
+  compressionSpeed?: Maybe<Scalars['Int']>;
+};
+
 export type Potrace = {
   turnPolicy?: Maybe<PotraceTurnPolicy>;
   turdSize?: Maybe<Scalars['Float']>;
@@ -4850,6 +4976,8 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -4924,6 +5052,7 @@ export type QueryImageSharpArgs = {
   resolutions?: Maybe<ImageSharpResolutionsFilterInput>;
   fluid?: Maybe<ImageSharpFluidFilterInput>;
   sizes?: Maybe<ImageSharpSizesFilterInput>;
+  gatsbyImageData?: Maybe<JsonQueryOperatorInput>;
   original?: Maybe<ImageSharpOriginalFilterInput>;
   resize?: Maybe<ImageSharpResizeFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -4978,6 +5107,7 @@ export type QueryContentfulSkillContentRichTextNodeArgs = {
   internal?: Maybe<InternalFilterInput>;
   content?: Maybe<StringQueryOperatorInput>;
   nodeType?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulSkillContentRichTextNodeSysFilterInput>;
   json?: Maybe<JsonQueryOperatorInput>;
 };
 
@@ -5048,6 +5178,7 @@ export type QueryContentfulEducationSchoolDescriptionTextNodeArgs = {
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
   description?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulEducationSchoolDescriptionTextNodeSysFilterInput>;
   childMarkdownRemark?: Maybe<MarkdownRemarkFilterInput>;
 };
 
@@ -5093,6 +5224,7 @@ export type QueryContentfulExperienceCompanyDescriptionTextNodeArgs = {
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
   description?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulExperienceCompanyDescriptionTextNodeSysFilterInput>;
   childMarkdownRemark?: Maybe<MarkdownRemarkFilterInput>;
 };
 
@@ -5139,6 +5271,7 @@ export type QueryContentfulPersonShortBioTextNodeArgs = {
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
   shortBio?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulPersonShortBioTextNodeSysFilterInput>;
   childMarkdownRemark?: Maybe<MarkdownRemarkFilterInput>;
 };
 
@@ -5193,6 +5326,7 @@ export type QueryContentfulContentTypeArgs = {
   name?: Maybe<StringQueryOperatorInput>;
   displayField?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
+  sys?: Maybe<ContentfulContentTypeSysFilterInput>;
 };
 
 
@@ -5248,6 +5382,8 @@ export type QueryAllSitePluginArgs = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
+  port?: Maybe<Scalars['Int']>;
+  host?: Maybe<Scalars['String']>;
   pathPrefix?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
@@ -5451,6 +5587,8 @@ export type SiteFieldsEnum =
   | 'siteMetadata___description'
   | 'siteMetadata___siteUrl'
   | 'siteMetadata___author'
+  | 'port'
+  | 'host'
   | 'pathPrefix'
   | 'polyfill'
   | 'id'
@@ -5543,6 +5681,8 @@ export type SiteFieldsEnum =
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -5747,9 +5887,29 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___resolve'
   | 'pluginCreator___name'
   | 'pluginCreator___version'
+  | 'pluginCreator___pluginOptions___displayName'
+  | 'pluginCreator___pluginOptions___minify'
+  | 'pluginCreator___pluginOptions___transpileTemplateLiterals'
+  | 'pluginCreator___pluginOptions___pure'
+  | 'pluginCreator___pluginOptions___base64Width'
+  | 'pluginCreator___pluginOptions___stripMetadata'
+  | 'pluginCreator___pluginOptions___defaultQuality'
+  | 'pluginCreator___pluginOptions___failOnError'
+  | 'pluginCreator___pluginOptions___output'
+  | 'pluginCreator___pluginOptions___createLinkInHead'
+  | 'pluginCreator___pluginOptions___isTSX'
+  | 'pluginCreator___pluginOptions___jsxPragma'
+  | 'pluginCreator___pluginOptions___allExtensions'
   | 'pluginCreator___pluginOptions___production'
   | 'pluginCreator___pluginOptions___spaceId'
   | 'pluginCreator___pluginOptions___accessToken'
+  | 'pluginCreator___pluginOptions___host'
+  | 'pluginCreator___pluginOptions___environment'
+  | 'pluginCreator___pluginOptions___downloadLocal'
+  | 'pluginCreator___pluginOptions___forceFullSync'
+  | 'pluginCreator___pluginOptions___pageLimit'
+  | 'pluginCreator___pluginOptions___assetDownloadWorkers'
+  | 'pluginCreator___pluginOptions___useNameForId'
   | 'pluginCreator___pluginOptions___policy'
   | 'pluginCreator___pluginOptions___policy___userAgent'
   | 'pluginCreator___pluginOptions___policy___allow'
@@ -5762,10 +5922,10 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___icon'
   | 'pluginCreator___pluginOptions___icon_options___purpose'
   | 'pluginCreator___pluginOptions___crossOrigin'
-  | 'pluginCreator___pluginOptions___cache_busting_mode'
-  | 'pluginCreator___pluginOptions___include_favicon'
   | 'pluginCreator___pluginOptions___legacy'
   | 'pluginCreator___pluginOptions___theme_color_in_head'
+  | 'pluginCreator___pluginOptions___cache_busting_mode'
+  | 'pluginCreator___pluginOptions___include_favicon'
   | 'pluginCreator___pluginOptions___cacheDigest'
   | 'pluginCreator___pluginOptions___precachePages'
   | 'pluginCreator___pluginOptions___trackingId'
@@ -5960,9 +6120,29 @@ export type SitePluginFieldsEnum =
   | 'resolve'
   | 'name'
   | 'version'
+  | 'pluginOptions___displayName'
+  | 'pluginOptions___minify'
+  | 'pluginOptions___transpileTemplateLiterals'
+  | 'pluginOptions___pure'
+  | 'pluginOptions___base64Width'
+  | 'pluginOptions___stripMetadata'
+  | 'pluginOptions___defaultQuality'
+  | 'pluginOptions___failOnError'
+  | 'pluginOptions___output'
+  | 'pluginOptions___createLinkInHead'
+  | 'pluginOptions___isTSX'
+  | 'pluginOptions___jsxPragma'
+  | 'pluginOptions___allExtensions'
   | 'pluginOptions___production'
   | 'pluginOptions___spaceId'
   | 'pluginOptions___accessToken'
+  | 'pluginOptions___host'
+  | 'pluginOptions___environment'
+  | 'pluginOptions___downloadLocal'
+  | 'pluginOptions___forceFullSync'
+  | 'pluginOptions___pageLimit'
+  | 'pluginOptions___assetDownloadWorkers'
+  | 'pluginOptions___useNameForId'
   | 'pluginOptions___policy'
   | 'pluginOptions___policy___userAgent'
   | 'pluginOptions___policy___allow'
@@ -5975,10 +6155,10 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___icon'
   | 'pluginOptions___icon_options___purpose'
   | 'pluginOptions___crossOrigin'
-  | 'pluginOptions___cache_busting_mode'
-  | 'pluginOptions___include_favicon'
   | 'pluginOptions___legacy'
   | 'pluginOptions___theme_color_in_head'
+  | 'pluginOptions___cache_busting_mode'
+  | 'pluginOptions___include_favicon'
   | 'pluginOptions___cacheDigest'
   | 'pluginOptions___precachePages'
   | 'pluginOptions___trackingId'
@@ -6101,9 +6281,29 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 };
 
 export type SitePluginPluginOptions = {
+  displayName?: Maybe<Scalars['Boolean']>;
+  minify?: Maybe<Scalars['Boolean']>;
+  transpileTemplateLiterals?: Maybe<Scalars['Boolean']>;
+  pure?: Maybe<Scalars['Boolean']>;
+  base64Width?: Maybe<Scalars['Int']>;
+  stripMetadata?: Maybe<Scalars['Boolean']>;
+  defaultQuality?: Maybe<Scalars['Int']>;
+  failOnError?: Maybe<Scalars['Boolean']>;
+  output?: Maybe<Scalars['String']>;
+  createLinkInHead?: Maybe<Scalars['Boolean']>;
+  isTSX?: Maybe<Scalars['Boolean']>;
+  jsxPragma?: Maybe<Scalars['String']>;
+  allExtensions?: Maybe<Scalars['Boolean']>;
   production?: Maybe<Scalars['Boolean']>;
   spaceId?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
+  host?: Maybe<Scalars['String']>;
+  environment?: Maybe<Scalars['String']>;
+  downloadLocal?: Maybe<Scalars['Boolean']>;
+  forceFullSync?: Maybe<Scalars['Boolean']>;
+  pageLimit?: Maybe<Scalars['Int']>;
+  assetDownloadWorkers?: Maybe<Scalars['Int']>;
+  useNameForId?: Maybe<Scalars['Boolean']>;
   policy?: Maybe<Array<Maybe<SitePluginPluginOptionsPolicy>>>;
   name?: Maybe<Scalars['String']>;
   short_name?: Maybe<Scalars['String']>;
@@ -6114,10 +6314,10 @@ export type SitePluginPluginOptions = {
   icon?: Maybe<Scalars['String']>;
   icon_options?: Maybe<SitePluginPluginOptionsIcon_Options>;
   crossOrigin?: Maybe<Scalars['String']>;
-  cache_busting_mode?: Maybe<Scalars['String']>;
-  include_favicon?: Maybe<Scalars['Boolean']>;
   legacy?: Maybe<Scalars['Boolean']>;
   theme_color_in_head?: Maybe<Scalars['Boolean']>;
+  cache_busting_mode?: Maybe<Scalars['String']>;
+  include_favicon?: Maybe<Scalars['Boolean']>;
   cacheDigest?: Maybe<Scalars['String']>;
   precachePages?: Maybe<Array<Maybe<Scalars['String']>>>;
   trackingId?: Maybe<Scalars['String']>;
@@ -6128,9 +6328,29 @@ export type SitePluginPluginOptions = {
 };
 
 export type SitePluginPluginOptionsFilterInput = {
+  displayName?: Maybe<BooleanQueryOperatorInput>;
+  minify?: Maybe<BooleanQueryOperatorInput>;
+  transpileTemplateLiterals?: Maybe<BooleanQueryOperatorInput>;
+  pure?: Maybe<BooleanQueryOperatorInput>;
+  base64Width?: Maybe<IntQueryOperatorInput>;
+  stripMetadata?: Maybe<BooleanQueryOperatorInput>;
+  defaultQuality?: Maybe<IntQueryOperatorInput>;
+  failOnError?: Maybe<BooleanQueryOperatorInput>;
+  output?: Maybe<StringQueryOperatorInput>;
+  createLinkInHead?: Maybe<BooleanQueryOperatorInput>;
+  isTSX?: Maybe<BooleanQueryOperatorInput>;
+  jsxPragma?: Maybe<StringQueryOperatorInput>;
+  allExtensions?: Maybe<BooleanQueryOperatorInput>;
   production?: Maybe<BooleanQueryOperatorInput>;
   spaceId?: Maybe<StringQueryOperatorInput>;
   accessToken?: Maybe<StringQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
+  environment?: Maybe<StringQueryOperatorInput>;
+  downloadLocal?: Maybe<BooleanQueryOperatorInput>;
+  forceFullSync?: Maybe<BooleanQueryOperatorInput>;
+  pageLimit?: Maybe<IntQueryOperatorInput>;
+  assetDownloadWorkers?: Maybe<IntQueryOperatorInput>;
+  useNameForId?: Maybe<BooleanQueryOperatorInput>;
   policy?: Maybe<SitePluginPluginOptionsPolicyFilterListInput>;
   name?: Maybe<StringQueryOperatorInput>;
   short_name?: Maybe<StringQueryOperatorInput>;
@@ -6141,10 +6361,10 @@ export type SitePluginPluginOptionsFilterInput = {
   icon?: Maybe<StringQueryOperatorInput>;
   icon_options?: Maybe<SitePluginPluginOptionsIcon_OptionsFilterInput>;
   crossOrigin?: Maybe<StringQueryOperatorInput>;
-  cache_busting_mode?: Maybe<StringQueryOperatorInput>;
-  include_favicon?: Maybe<BooleanQueryOperatorInput>;
   legacy?: Maybe<BooleanQueryOperatorInput>;
   theme_color_in_head?: Maybe<BooleanQueryOperatorInput>;
+  cache_busting_mode?: Maybe<StringQueryOperatorInput>;
+  include_favicon?: Maybe<BooleanQueryOperatorInput>;
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   precachePages?: Maybe<StringQueryOperatorInput>;
   trackingId?: Maybe<StringQueryOperatorInput>;
@@ -6213,6 +6433,19 @@ export type StringQueryOperatorInput = {
   glob?: Maybe<Scalars['String']>;
 };
 
+export type TransformOptions = {
+  grayscale?: Maybe<Scalars['Boolean']>;
+  duotone?: Maybe<DuotoneGradient>;
+  rotate?: Maybe<Scalars['Int']>;
+  trim?: Maybe<Scalars['Float']>;
+  cropFocus?: Maybe<ImageCropFocus>;
+  fit?: Maybe<ImageFit>;
+};
+
+export type WebPOptions = {
+  quality?: Maybe<Scalars['Int']>;
+};
+
 export type SkillsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6248,6 +6481,14 @@ export type NoughtsAndCrossesQueryQuery = { site?: Maybe<{ siteMetadata?: Maybe<
     & { image?: Maybe<{ fluid?: Maybe<GatsbyContentfulFluid_WithWebpFragment> }> }
   )> };
 
+export type TodoQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TodoQueryQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, contentfulPerson?: Maybe<(
+    Pick<ContentfulPerson, 'name'>
+    & { image?: Maybe<{ fluid?: Maybe<GatsbyContentfulFluid_WithWebpFragment> }> }
+  )> };
+
 export type PageBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
@@ -6255,7 +6496,7 @@ export type PageBySlugQueryVariables = Exact<{
 
 export type PageBySlugQuery = { contentfulSkill?: Maybe<(
     Pick<ContentfulSkill, 'skillName' | 'rating'>
-    & { content?: Maybe<Pick<ContentfulSkillContentRichTextNode, 'content' | 'json'>> }
+    & { content?: Maybe<Pick<ContentfulSkillContentRichTextNode, 'json'>> }
   )>, contentfulPerson?: Maybe<{ image?: Maybe<{ fluid?: Maybe<GatsbyContentfulFluid_WithWebpFragment> }> }> };
 
 export type GatsbyContentfulFixedFragment = Pick<ContentfulFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;

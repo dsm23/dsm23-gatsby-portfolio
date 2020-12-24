@@ -24,7 +24,7 @@ const SideNav: FunctionComponent<Props> = ({
   return (
     <nav
       aria-label="sidebar navigation"
-      tw="bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 md:(flex items-center) lg:(flex-col justify-center h-full w-64) w-full top-0 max-h-full fixed z-10 opacity-100"
+      tw="bg-gradient-to-r from-green-700 via-green-800 to-green-900 md:(flex items-center) lg:(flex-col justify-center h-full w-64) w-full top-0 max-h-full fixed z-10 opacity-100"
     >
       <div tw="flex h-20 justify-between items-center lg:(flex-col justify-center h-auto) px-5">
         <a

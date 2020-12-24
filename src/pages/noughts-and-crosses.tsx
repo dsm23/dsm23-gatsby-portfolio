@@ -183,7 +183,7 @@ const NoughtsAndCrosses: FunctionComponent<Props> = ({ data, location }) => {
             <GoBack aria-label="Go Back" />
           </div>
         </StyledLink>
-        <h1 tw="text-4xl text-teal-600 tracking-widest uppercase">
+        <h1 tw="text-4xl text-green-600 tracking-widest uppercase">
           Noughts and Crosses
         </h1>
 
