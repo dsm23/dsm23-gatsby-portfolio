@@ -33,7 +33,6 @@ module.exports = {
     author: `dsm23`,
     description: `David Murdoch React Portfolio`,
   },
-  pathPrefix: '/gatsby-contentful-starter',
   plugins: [
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',

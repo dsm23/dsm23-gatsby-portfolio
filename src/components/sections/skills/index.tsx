@@ -1,10 +1,4 @@
-import React, {
-  FunctionComponent,
-  HTMLAttributes,
-  lazy,
-  Suspense,
-  SVGAttributes,
-} from 'react';
+import React, { FunctionComponent, HTMLAttributes } from 'react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 
 import 'twin.macro';
@@ -12,7 +6,7 @@ import 'twin.macro';
 import {
   Algolia,
   Angular,
-  Css3,
+  CssThree,
   Firebase,
   Gatsby,
   Html5,
@@ -41,7 +35,7 @@ interface Icons {
 const ToolIcon: Icons = {
   Algolia,
   Angular,
-  Css3,
+  CssThree,
   Firebase,
   Gatsby,
   Html5,
@@ -68,9 +62,6 @@ const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
           rating
           component
           slug
-          content {
-            json
-          }
         }
       }
     }

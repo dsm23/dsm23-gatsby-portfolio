@@ -67,3 +67,11 @@ public
 .contentful.json
 .env*
 !.env.example
+
+# yarn v2
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

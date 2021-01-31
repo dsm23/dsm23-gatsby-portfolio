@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
-import {
-  documentToReactComponents,
-  Options,
-} from '@contentful/rich-text-react-renderer';
+import { Options } from '@contentful/rich-text-react-renderer';
+import { renderRichText } from 'gatsby-source-contentful/rich-text';
+
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 
 import { Anchor } from '../components/anchor';
@@ -54,7 +53,7 @@ const options: Options = {
 };
 
 const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
-  const json = data?.contentfulSkill?.content?.json ?? {};
+  const body = data?.contentfulSkill?.content;
   const skillName = data?.contentfulSkill?.skillName ?? '';
   const rating = data?.contentfulSkill?.rating ?? 0;
 
@@ -73,7 +72,8 @@ const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
         <h1 tw="text-4xl mt-3">
           <span tw="text-green-600 tracking-widest">SKILL:</span> {skillName}
         </h1>
-        <div tw="mb-4">{documentToReactComponents(json, options)}</div>
+        {/* @ts-ignore */}
+        <div tw="mb-4">{renderRichText(body, options)}</div>
 
         <div tw="flex">
           <h2 tw="text-green-600 tracking-widest">PROFICIENCY:</h2>
@@ -97,7 +97,7 @@ export const pageQuery = graphql`
       skillName
       rating
       content {
-        json
+        raw
       }
     }
     contentfulPerson {
