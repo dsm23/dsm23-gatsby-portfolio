@@ -15,13 +15,13 @@ ${chalk.yellow.bold('yarn run setup')} automates the following steps for you:
 When this is done run:
 
 ${chalk.yellow(
-  'yarn run dev'
+  'npm run dev'
 )} to start a development environment at ${chalk.green('localhost:8000')}
 
 or
 
 ${chalk.yellow(
-  'yarn run build'
+  'npm run build'
 )} to create a production ready static site in ${chalk.green('./public')}
 
 For further information check the readme of the project

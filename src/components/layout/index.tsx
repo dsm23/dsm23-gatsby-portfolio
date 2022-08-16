@@ -4,6 +4,7 @@ import { Link, PageRendererProps } from 'gatsby';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 
 import 'twin.macro';
+import 'styled-components/macro';
 
 import { SideNav } from '../sidenav';
 import { SideNavLink, SideNavSpan } from '../sidenav-link';
@@ -40,9 +41,9 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
   const renderSidenav = isIndexPage ? (
     <Scrollspy
       items={items}
-      currentClassName="text-white bg-teal-700"
+      currentClassName="text-white bg-green-700"
       componentTag="div"
-      tw="block md:inline-flex md:flex-row md:ml-auto md:w-auto w-full lg:items-center md:items-start lg:h-auto lg:block text-gray-400"
+      className="block md:inline-flex md:flex-row md:ml-auto md:w-auto w-full lg:items-center md:items-start lg:h-auto lg:block text-gray-400"
     >
       {items.map(label => (
         <SideNavLink
@@ -74,13 +75,13 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
   );
 
   return (
-    <div tw="flex flex-col lg:flex-row font-sans w-full">
+    <div className="flex flex-col lg:flex-row font-sans w-full">
       <header>
         <SideNav data={data} open={open} onToggle={handleToggle}>
           {renderSidenav}
         </SideNav>
       </header>
-      <div tw="mt-20 lg:ml-64 lg:mt-auto w-full">{children}</div>
+      <div className="mt-20 lg:ml-64 lg:mt-auto w-full">{children}</div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { graphql, PageRendererProps } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
 import 'twin.macro';
+import 'styled-components/macro';
 
 import Layout from '../components/layout';
 
@@ -56,8 +57,8 @@ const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
         <Projects id="projects" />
         <Divisor />
         <Section id="interests">
-          <h2 tw="text-5xl">Interests</h2>
-          <ul tw="list-disc list-inside">
+          <h2 className="text-5xl">Interests</h2>
+          <ul className="list-disc list-inside">
             {interests.map(({ interest }) => (
               <li key={`${interest}-interest`}>{interest}</li>
             ))}
@@ -69,6 +70,11 @@ const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
 };
 
 export default RootIndex;
+
+// layout: FULL_WIDTH
+// transformOptions {
+//   cropFocus: FACE
+// }
 
 export const pageQuery = graphql`
   query HomeQuery {
@@ -88,14 +94,13 @@ export const pageQuery = graphql`
       }
       title
       image {
-        fluid(
-          maxWidth: 192
-          maxHeight: 192
-          resizingBehavior: FILL
-          cropFocus: FACE
-        ) {
-          ...GatsbyContentfulFluid_withWebp
-        }
+        gatsbyImage(
+          cropFocus: FACES
+          layout: FULL_WIDTH
+          placeholder: BLURRED
+          height: 192
+          width: 192
+        )
       }
     }
     allContentfulExperienceCompany {

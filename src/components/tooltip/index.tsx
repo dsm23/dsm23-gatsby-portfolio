@@ -10,7 +10,7 @@ export const PopperBox = tw.div`flex flex-col justify-center items-center text-w
 
 export const TransitionedPopperBox = tw(
   PopperBox,
-)`transition-all duration-100 ease-in-out`;
+)`transition-all duration-75 ease-in-out`;
 
 export const fadeIn = keyframes`
   from { opacity: 0; }

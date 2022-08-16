@@ -1,13 +1,7 @@
-import 'tailwindcss/dist/base.min.css';
+// import 'tailwindcss/dist/base.min.css';
 
 import 'typeface-inter';
 import './src/styles.css';
-
-export const onClientEntry = async () => {
-  if (typeof IntersectionObserver === `undefined`) {
-    await import(`intersection-observer`);
-  }
-};
 
 export const onServiceWorkerUpdateReady = () => {
   const answer = window.confirm(

@@ -1,61 +1,11 @@
-import React, {
-  FunctionComponent,
-  HTMLAttributes,
-  lazy,
-  Suspense,
-  SVGAttributes,
-} from 'react';
+import React, { FunctionComponent, HTMLAttributes } from 'react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
-
-import 'twin.macro';
-
-import {
-  Algolia,
-  Angular,
-  Css3,
-  Firebase,
-  Gatsby,
-  Html5,
-  Javascript,
-  Jest,
-  Kubernetes,
-  NextDotJs,
-  ReactJs,
-  Python,
-  Stripe,
-  Tailwindcss,
-  Typescript,
-  VueDotJs,
-} from '@icons-pack/react-simple-icons';
 
 import { Section } from '../../section';
 import { Query } from '../../../../graphql-types';
 import { IconWrapper } from '../../icon-wrapper';
-
-type Icon = typeof Html5;
-
-interface Icons {
-  [key: string]: Icon;
-}
-// coupling
-const ToolIcon: Icons = {
-  Algolia,
-  Angular,
-  Css3,
-  Firebase,
-  Gatsby,
-  Html5,
-  Javascript,
-  Jest,
-  Kubernetes,
-  NextDotJs,
-  ReactJs,
-  Python,
-  Stripe,
-  Tailwindcss,
-  Typescript,
-  VueDotJs,
-};
+import SVGLoader from './SVGLoader';
+import { Tooltip } from '../../tooltip';
 
 const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
   ...props
@@ -66,10 +16,9 @@ const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
         nodes {
           skillName
           rating
-          component
           slug
-          content {
-            json
+          icon {
+            url
           }
         }
       }
@@ -80,24 +29,16 @@ const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
 
   return (
     <Section {...props}>
-      <h2 tw="text-5xl">Skills</h2>
-      <div tw="flex flex-wrap items-baseline">
-        {skills.map(({ component, slug }) => {
-          let Component: Icon | undefined;
-
-          if (component) {
-            Component = (ToolIcon as Icons)[component as string];
-          }
-
-          if (!Component) {
-            return null;
-          }
-
+      <h2 className="text-5xl">Skills</h2>
+      <div className="flex flex-wrap items-baseline">
+        {skills.map(({ icon, skillName, slug }) => {
           return (
             <Link to={`/${slug}`} key={`${slug}-svg-icon`}>
-              <IconWrapper>
-                <Component aria-label={slug as string} role="img" size={64} />
-              </IconWrapper>
+              <Tooltip tooltipNode={skillName}>
+                <IconWrapper>
+                  <SVGLoader className="h-16 w-16" src={icon!.url as string} />
+                </IconWrapper>
+              </Tooltip>
             </Link>
           );
         })}

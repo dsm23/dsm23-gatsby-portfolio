@@ -1,33 +1,11 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  future: {
-    purgeLayersByDefault: true,
-  },
-  purge: {
-    layers: ['utilities'],
-    content: ['./src/**/*.html', './src/**/*.[jt]s?(x)'],
-
-    // These options are passed through directly to PurgeCSS
-    options: {
-      defaultExtractor: content => {
-        // Capture as liberally as possible, including things like `h-(screen-1.5)`
-        const broadMatches = content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [];
-
-        // Capture classes within other delimiters like .block(class="w-1/2") in Pug
-        const innerMatches =
-          content.match(/(?<=classname=["{])(.*)(?=["}])/gi) || [];
-
-        let output = [];
-
-        for (const str of innerMatches) {
-          output = [...output, ...str.split(' ')];
-        }
-
-        return output;
-      },
-    },
-  },
+  content: [
+    './public/index.html',
+    './src/pages/*.[jt]s?(x)',
+    './src/components/**/*.[jt]s?(x)',
+  ],    
   theme: {
     extend: {
       fontFamily: {
@@ -62,11 +40,14 @@ module.exports = {
         '11/12': '91.666667%',
         '12/12': '100%',
       },
+      textColor: {
+        'teal-600': 'rgb(13 148 136)',
+      }
     },
   },
   // variants: {
   //   backgroundColor: ['responsive', 'hover', 'focus', 'group-focus'],
   //   textColor: ['responsive', 'hover', 'focus', 'group-focus'],
   // },
-  plugins: [require('@tailwindcss/ui')],
+  plugins: [],
 };

@@ -6,10 +6,7 @@ import React, {
   useState,
 } from 'react';
 import lottie, { AnimationItem, AnimationConfigWithData } from 'lottie-web';
-import { useIntersection } from 'react-use';
 import animationData from '../../animations/waveLine.json';
-
-import 'twin.macro';
 
 type OptionsConfig = Omit<AnimationConfigWithData, 'container'>;
 
@@ -34,17 +31,31 @@ const Divisor: FunctionComponent<HTMLAttributes<HTMLDivElement>> = props => {
   const animationContainer = useRef<HTMLDivElement>(null);
   const [autoplay, setAutoplay] = useState<boolean>(false);
 
-  const intersection = useIntersection(animationContainer, {
-    root: null,
+  const observerOptions = {
+    root: animationContainer.current,
     rootMargin: '0px',
     threshold: 1,
-  });
+  };
+
+  const callback = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver,
+  ) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setAutoplay(true);
+      }
+    });
+  };
 
   useEffect(() => {
-    if (intersection?.intersectionRatio === 1) {
-      setAutoplay(true);
-    }
-  }, [intersection?.intersectionRatio]);
+    const observer = new IntersectionObserver(callback, observerOptions);
+
+    observer.observe(animationContainer.current!);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     const anim: AnimationItem = lottie.loadAnimation({
@@ -59,7 +70,7 @@ const Divisor: FunctionComponent<HTMLAttributes<HTMLDivElement>> = props => {
     return () => anim.destroy(); // optional clean up for unmounting
   }, [autoplay]);
 
-  return <div {...props} tw="h-32" ref={animationContainer} />;
+  return <div {...props} className="h-32" ref={animationContainer} />;
 };
 
 export { Divisor };

@@ -1,17 +1,26 @@
-import tw, { styled, theme } from 'twin.macro';
+import React, { FunctionComponent, HTMLAttributes } from 'react';
+import clsx from 'clsx';
 
-interface Props {
+import * as styles from './styles.module.css';
+
+interface Props extends HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;
 }
 
-const MobileMenu = styled.div<Props>(({ isOpen }) => [
-  tw`w-full transition-all transform duration-500 ease-in-out h-0 md:(h-auto flex items-center ml-auto w-auto) lg:block lg:w-full`,
-  {
-    maxHeight: `calc(100% - ${theme`height.20`})`,
-  },
-  isOpen && {
-    height: '20rem',
-  },
-]);
+const MobileMenu: FunctionComponent<Props> = ({
+  className,
+  isOpen,
+  ...props
+}) => (
+  <div
+    className={clsx(
+      'w-full transition-all transform duration-500 ease-in-out h-0 md:h-auto md:flex md:items-center md:ml-auto md:w-auto lg:block lg:w-full',
+      styles.maxHeight,
+      { 'h-80': isOpen },
+      className,
+    )}
+    {...props}
+  />
+);
 
 export default MobileMenu;

@@ -1,5 +1,8 @@
 import React, { FunctionComponent, SVGAttributes } from 'react';
-import { theme } from 'twin.macro';
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from '../../../../tailwind.config.js'
+
+const fullConfig = resolveConfig(tailwindConfig);
 
 const Cross: FunctionComponent<SVGAttributes<SVGSVGElement>> = props => (
   <svg width={24} height={24} fill="none" {...props}>
@@ -7,7 +10,7 @@ const Cross: FunctionComponent<SVGAttributes<SVGSVGElement>> = props => (
       strokeLinejoin="round"
       strokeLinecap="round"
       strokeMiterlimit={10}
-      stroke={`${theme`colors.white`}`}
+      stroke={fullConfig.theme?.colors?.white}
       d="M3 3l18 18M3 21L21 3"
     />
   </svg>

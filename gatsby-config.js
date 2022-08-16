@@ -35,7 +35,7 @@ module.exports = {
   },
   pathPrefix: '/gatsby-contentful-starter',
   plugins: [
-    'gatsby-transformer-remark',
+    'gatsby-plugin-image',
     'gatsby-transformer-sharp',
     'gatsby-plugin-graphql-codegen',
     'gatsby-plugin-netlify',
@@ -46,13 +46,6 @@ module.exports = {
     'gatsby-plugin-smoothscroll',
     'gatsby-plugin-postcss',
     'gatsby-plugin-typescript',
-    {
-      resolve: 'gatsby-plugin-webpack-bundle-analyzer',
-      options: {
-        // analyzerPort: 3000,
-        production: false,
-      },
-    },
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,

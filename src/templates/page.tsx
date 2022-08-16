@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
-import {
-  documentToReactComponents,
-  Options,
-} from '@contentful/rich-text-react-renderer';
+import { Options } from '@contentful/rich-text-react-renderer';
+import { renderRichText } from 'gatsby-source-contentful/rich-text';
+
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 
 import { Anchor } from '../components/anchor';
@@ -15,8 +14,7 @@ import { ContentfulPerson, Query } from '../../graphql-types';
 
 import 'twin.macro';
 
-import { EmptyStar } from '../components/svgs/empty-star';
-import { FilledStar } from '../components/svgs/filled-star';
+import { EmptyStar, FilledStar } from '../components/svgs';
 
 interface Props extends PageRendererProps {
   data: Query;
@@ -45,7 +43,7 @@ const options: Options = {
     //   />
     // ),
     [INLINES.HYPERLINK]: (node, children) => (
-      <Anchor href={node.data.uri} tw="italic">
+      <Anchor href={node.data.uri} className="italic">
         {children}
       </Anchor>
     ),
@@ -54,7 +52,7 @@ const options: Options = {
 };
 
 const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
-  const json = data?.contentfulSkill?.content?.json ?? {};
+  const body = data?.contentfulSkill?.content;
   const skillName = data?.contentfulSkill?.skillName ?? '';
   const rating = data?.contentfulSkill?.rating ?? 0;
 
@@ -63,20 +61,21 @@ const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
   return (
     <Layout location={location} data={author as ContentfulPerson}>
       <SEO description="Skill page" title={skillName} />
-      <Main tw="px-6 py-8">
+      <Main className="px-6 py-8">
         <StyledLink to="/#skills" className="group">
           <div className="group">
             <GoBack aria-label="Go Back" />
           </div>
         </StyledLink>
 
-        <h1 tw="text-4xl">
-          <span tw="text-teal-600 tracking-widest">SKILL:</span> {skillName}
+        <h1 className="text-4xl">
+          <span className="text-teal-600 tracking-widest">SKILL:</span>{' '}
+          {skillName}
         </h1>
-        <div tw="mb-4">{documentToReactComponents(json, options)}</div>
+        <div className="mb-4">{renderRichText(body, options)}</div>
 
-        <div tw="flex">
-          <h2 tw="text-teal-600 tracking-widest">PROFICIENCY:</h2>
+        <div className="flex">
+          <h2 className="text-teal-600 tracking-widest">PROFICIENCY:</h2>
           {Array.from({ length: rating }, (_, i) => i).map(num => (
             <FilledStar key={`${num}-${skillName}-filled`} />
           ))}
@@ -97,20 +96,19 @@ export const pageQuery = graphql`
       skillName
       rating
       content {
-        content
-        json
+        raw
       }
     }
     contentfulPerson {
+      name
       image {
-        fluid(
-          maxWidth: 192
-          maxHeight: 192
-          resizingBehavior: FILL
-          cropFocus: FACE
-        ) {
-          ...GatsbyContentfulFluid_withWebp
-        }
+        gatsbyImage(
+          cropFocus: FACES
+          layout: FULL_WIDTH
+          placeholder: BLURRED
+          height: 192
+          width: 192
+        )
       }
     }
   }

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, SVGAttributes } from 'react';
 
-const SvgComponent: FunctionComponent<SVGAttributes<SVGSVGElement>> = props => (
+const Help: FunctionComponent<SVGAttributes<SVGSVGElement>> = props => (
   <svg width={200} height={150} viewBox="0 0 800 600" fill="none" {...props}>
     <path
       opacity={0.89}
@@ -24,4 +24,4 @@ const SvgComponent: FunctionComponent<SVGAttributes<SVGSVGElement>> = props => (
   </svg>
 );
 
-export default SvgComponent;
+export { Help };

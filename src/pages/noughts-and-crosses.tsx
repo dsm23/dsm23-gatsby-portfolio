@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import 'twin.macro';
+import clsx from 'clsx';
 import { Anchor } from '../components/anchor';
 import Layout from '../components/layout';
 import { GoBack, StyledLink } from '../components/styled-go-back';
@@ -18,10 +18,15 @@ type Squares = (null | 'X' | 'O')[];
 
 const Square: FunctionComponent<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
+  className,
   onClick,
   ...props
 }) => (
-  <button {...props} tw="w-full h-20 md:h-40 border" onClick={onClick}>
+  <button
+    {...props}
+    className={clsx('w-full h-20 md:h-40 border', className)}
+    onClick={onClick}
+  >
     {children}
   </button>
 );
@@ -38,7 +43,7 @@ const Board: FunctionComponent<
         onClick={() => onClick(i)}
         aria-label={`game board, position: ${i % 3} ${Math.floor(i / 3)}`}
         role="button"
-        tw="w-1/3"
+        className="w-1/3"
       >
         {squares[i]}
       </Square>
@@ -46,7 +51,7 @@ const Board: FunctionComponent<
   };
 
   return (
-    <div tw="flex flex-wrap w-full">
+    <div className="flex flex-wrap w-full">
       {renderSquare(0)}
       {renderSquare(1)}
       {renderSquare(2)}
@@ -126,7 +131,7 @@ const Game = () => {
 
   return (
     <>
-      <div tw="w-full">
+      <div className="w-full">
         <Board
           squares={current.squares}
           onClick={(i: number) => handleClick(i)}
@@ -177,17 +182,15 @@ const NoughtsAndCrosses: FunctionComponent<Props> = ({ data, location }) => {
           content="The calculator project in David Murdoch's portfolio"
         />
       </Helmet>
-      <Main tw="px-6 py-8 w-full">
+      <Main className="px-6 py-8 w-full">
         <StyledLink to="/#projects" className="group">
-          <div className="group">
-            <GoBack aria-label="Go Back" />
-          </div>
+          <GoBack aria-label="Go Back" />
         </StyledLink>
-        <h1 tw="text-4xl text-teal-600 tracking-widest uppercase">
+        <h1 className="text-4xl text-teal-600 tracking-widest uppercase">
           Noughts and Crosses
         </h1>
 
-        <p tw="text-gray-900">
+        <p className="text-gray-900">
           The tutorial example from{' '}
           <Anchor href="https://reactjs.org/tutorial/tutorial.html">
             reactjs docs
@@ -213,14 +216,13 @@ export const pageQuery = graphql`
     contentfulPerson {
       name
       image {
-        fluid(
-          maxWidth: 192
-          maxHeight: 192
-          resizingBehavior: FILL
-          cropFocus: FACE
-        ) {
-          ...GatsbyContentfulFluid_withWebp
-        }
+        gatsbyImage(
+          cropFocus: FACES
+          layout: FULL_WIDTH
+          placeholder: BLURRED
+          height: 192
+          width: 192
+        )
       }
     }
   }

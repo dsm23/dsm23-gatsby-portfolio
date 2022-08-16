@@ -15,9 +15,9 @@ export type PlymorphicProps<E extends ElementType = ElementType> = {
 export type Props<E extends ElementType> = PlymorphicProps<E> &
   Omit<ComponentProps<E>, keyof PlymorphicProps>;
 
-const defaultElement = 'main';
+const defaultElement = 'a';
 
-const Main: <E extends ElementType = typeof defaultElement>(
+const Anchor: <E extends ElementType = typeof defaultElement>(
   props: Props<E>,
 ) => ReactElement | null = forwardRef(
   (
@@ -25,11 +25,14 @@ const Main: <E extends ElementType = typeof defaultElement>(
     ref: Ref<Element>,
   ) => (
     <Component
-      className={clsx('mt-20 lg:mt-0', className)}
+      className={clsx(
+        'text-teal-900 hover:underline outline-none focus:bg-yellow-500 focus:rounded px-1 -mx-1',
+        className,
+      )}
       ref={ref}
       {...props}
     />
   ),
 );
 
-export { Main };
+export { Anchor };
