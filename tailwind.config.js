@@ -49,5 +49,12 @@ module.exports = {
   //   backgroundColor: ['responsive', 'hover', 'focus', 'group-focus'],
   //   textColor: ['responsive', 'hover', 'focus', 'group-focus'],
   // },
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      }
+    },
+  },
   plugins: [],
 };
