@@ -1,5 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './public/index.html',
@@ -9,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       spacing: {
         '1/2': '50%',
@@ -42,17 +43,6 @@ module.exports = {
       },
       textColor: {
         'teal-600': 'rgb(13 148 136)',
-      }
-    },
-  },
-  // variants: {
-  //   backgroundColor: ['responsive', 'hover', 'focus', 'group-focus'],
-  //   textColor: ['responsive', 'hover', 'focus', 'group-focus'],
-  // },
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       }
     },
   },
