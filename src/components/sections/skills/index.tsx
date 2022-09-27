@@ -34,6 +34,7 @@ const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
         {skills.map(({ icon, skillName, slug }) => {
           return (
             <Link to={`/${slug}`} key={`${slug}-svg-icon`}>
+              <span className="sr-only">{skillName}</span>
               <Tooltip tooltipNode={skillName}>
                 <IconWrapper>
                   <SVGLoader className="h-16 w-16" src={icon!.url as string} />
