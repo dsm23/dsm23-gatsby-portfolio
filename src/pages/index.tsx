@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, PageRendererProps } from 'gatsby';
-import { Helmet } from 'react-helmet';
+import { graphql, HeadFC, PageRendererProps } from 'gatsby';
 
 import 'twin.macro';
 import 'styled-components/macro';
 
 import Layout from '../components/layout';
+import { SEO } from '../components/seo';
 
 import {
   Divisor,
@@ -24,9 +24,20 @@ interface Props extends PageRendererProps {
   data: Query;
 }
 
-const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
-  const siteTitle = data?.site?.siteMetadata?.title as string;
+export const Head: HeadFC<Query> = ({ data }) => {
+  const skillName = data?.contentfulSkill?.skillName ?? '';
 
+  return (
+    <SEO
+      description="The react version of David Murdoch's portfolio built with tailwind and gatsby"
+      title={skillName}
+    >
+      <title>{data?.site?.siteMetadata?.title}</title>
+    </SEO>
+  );
+};
+
+const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
   const author = data.contentfulPerson;
 
   const experiences = data.allContentfulExperienceCompany.nodes;
@@ -35,13 +46,6 @@ const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
 
   return (
     <Layout location={location} data={author as ContentfulPerson}>
-      <Helmet title={siteTitle}>
-        <html lang="en" />
-        <meta
-          name="description"
-          content="The react version of David Murdoch's portfolio built with tailwind and gatsby"
-        />
-      </Helmet>
       <Main>
         <Home id="home" tw="mt-64" author={author as ContentfulPerson} />
         <Divisor />

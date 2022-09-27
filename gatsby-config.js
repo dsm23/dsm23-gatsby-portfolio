@@ -40,7 +40,6 @@ module.exports = {
     'gatsby-plugin-graphql-codegen',
     'gatsby-plugin-netlify',
     'gatsby-plugin-styled-components',
-    'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-smoothscroll',

@@ -6,22 +6,20 @@
  */
 
 import React, { FunctionComponent } from 'react';
-import { Helmet, HelmetProps } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { Query } from '../../../graphql-types';
 
+import codeRef from '../../images/code.svg';
+
 interface Props {
-  meta?: HelmetProps['meta'];
   description?: string;
-  lang?: HelmetProps['htmlAttributes'];
   title: string;
 }
 
 const SEO: FunctionComponent<Props> = ({
+  children,
   description = '',
-  lang = 'en',
-  meta = [],
   title,
 }) => {
   const { site } = useStaticQuery<Query>(
@@ -32,6 +30,7 @@ const SEO: FunctionComponent<Props> = ({
             title
             description
             author
+            siteUrl
           }
         }
       }
@@ -42,48 +41,28 @@ const SEO: FunctionComponent<Props> = ({
     description || (site?.siteMetadata?.description as string);
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang: lang as string,
-      }}
-      title={title}
-      titleTemplate={`${site?.siteMetadata?.title} | %s`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site?.siteMetadata?.author as string,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-        ...meta,
-      ]}
-    />
+    <>
+      <meta property="description" content={metaDescription} />
+
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:title" content={title} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={site?.siteMetadata?.siteUrl as string} />
+
+      <meta property="og:image" content={codeRef} />
+
+      <meta name="twitter:card" content="summary" />
+      <meta
+        name="twitter:site"
+        content={site?.siteMetadata?.siteUrl as string}
+      />
+      <meta
+        name="twitter:creator"
+        content={site?.siteMetadata?.author as string}
+      />
+      <meta name="twitter:description" content={metaDescription} />
+      {children}
+    </>
   );
 };
 

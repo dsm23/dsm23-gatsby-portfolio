@@ -1071,6 +1071,7 @@ export type ContentfulSkill = ContentfulReference & ContentfulEntry & Node & {
   createdAt?: Maybe<Scalars['Date']>;
   updatedAt?: Maybe<Scalars['Date']>;
   sys?: Maybe<ContentfulSkillSys>;
+  gatsbyPath?: Maybe<Scalars['String']>;
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
@@ -1090,6 +1091,11 @@ export type ContentfulSkillUpdatedAtArgs = {
   fromNow?: InputMaybe<Scalars['Boolean']>;
   difference?: InputMaybe<Scalars['String']>;
   locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type ContentfulSkillGatsbyPathArgs = {
+  filePath?: InputMaybe<Scalars['String']>;
 };
 
 export type ContentfulSkillContent = {
@@ -1642,6 +1648,7 @@ export type QueryContentfulSkillArgs = {
   createdAt?: InputMaybe<DateQueryOperatorInput>;
   updatedAt?: InputMaybe<DateQueryOperatorInput>;
   sys?: InputMaybe<ContentfulSkillSysFilterInput>;
+  gatsbyPath?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
   internal?: InputMaybe<InternalFilterInput>;
@@ -6125,6 +6132,7 @@ export type ContentfulSkillFieldsEnum =
   | 'sys___contentType___sys___type'
   | 'sys___contentType___sys___linkType'
   | 'sys___contentType___sys___id'
+  | 'gatsbyPath'
   | 'parent___id'
   | 'parent___parent___id'
   | 'parent___parent___parent___id'
@@ -6273,6 +6281,7 @@ export type ContentfulSkillFilterInput = {
   createdAt?: InputMaybe<DateQueryOperatorInput>;
   updatedAt?: InputMaybe<DateQueryOperatorInput>;
   sys?: InputMaybe<ContentfulSkillSysFilterInput>;
+  gatsbyPath?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
   internal?: InputMaybe<InternalFilterInput>;
@@ -7060,12 +7069,12 @@ export type SkillsQueryQuery = { allContentfulSkill: { nodes: Array<{ skillName?
 export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_1_Query = { site?: { siteMetadata?: { title?: string | null, description?: string | null, author?: string | null } | null } | null };
+export type Unnamed_1_Query = { site?: { siteMetadata?: { title?: string | null, description?: string | null, author?: string | null, siteUrl?: string | null } | null } | null };
 
 export type NoContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NoContentQuery = { contentfulPerson?: { name?: string | null, image?: { gatsbyImage?: any | null } | null } | null };
+export type NoContentQuery = { contentfulPerson?: { name?: string | null, image?: { gatsbyImage?: any | null } | null } | null, site?: { siteMetadata?: { title?: string | null } | null } | null };
 
 export type FizzBuzzQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -7087,7 +7096,7 @@ export type PageBySlugQueryVariables = Exact<{
 }>;
 
 
-export type PageBySlugQuery = { contentfulSkill?: { skillName?: string | null, rating?: number | null, content?: { raw?: string | null } | null } | null, contentfulPerson?: { name?: string | null, image?: { gatsbyImage?: any | null } | null } | null };
+export type PageBySlugQuery = { contentfulSkill?: { skillName?: string | null, rating?: number | null, content?: { raw?: string | null } | null } | null, contentfulPerson?: { name?: string | null, image?: { gatsbyImage?: any | null } | null } | null, site?: { siteMetadata?: { title?: string | null } | null } | null };
 
 export type GatsbyImageSharpFixedFragment = { base64?: string | null, width: number, height: number, src: string, srcSet: string };
 

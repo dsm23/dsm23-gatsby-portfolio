@@ -3,14 +3,14 @@ import React, {
   ButtonHTMLAttributes,
   useState,
 } from 'react';
-import { graphql, PageRendererProps } from 'gatsby';
-import { Helmet } from 'react-helmet';
+import { graphql, HeadFC, PageRendererProps } from 'gatsby';
 import clsx from 'clsx';
 import { Anchor } from '../components/anchor';
 import Layout from '../components/layout';
 import { GoBack, StyledLink } from '../components/styled-go-back';
 
 import { Main } from '../components';
+import { SEO } from '../components/seo';
 
 import { Query, ContentfulPerson } from '../../graphql-types';
 
@@ -169,19 +169,24 @@ interface Props extends PageRendererProps {
   data: Query;
 }
 
+export const Head: HeadFC<Query> = ({ data }) => {
+  const skillName = data?.contentfulSkill?.skillName ?? '';
+
+  return (
+    <SEO
+      description="The noughts and crosses project in David Murdoch's portfolio"
+      title={skillName}
+    >
+      <title>{data?.site?.siteMetadata?.title} | Noughts and Crosses</title>
+    </SEO>
+  );
+};
+
 const NoughtsAndCrosses: FunctionComponent<Props> = ({ data, location }) => {
-  const siteTitle = data?.site?.siteMetadata?.title as string;
   const author = data.contentfulPerson;
 
   return (
     <Layout location={location} data={author as ContentfulPerson}>
-      <Helmet title={siteTitle}>
-        <html lang="en" />
-        <meta
-          name="description"
-          content="The calculator project in David Murdoch's portfolio"
-        />
-      </Helmet>
       <Main className="px-6 py-8 w-full">
         <StyledLink to="/#projects" className="group">
           <GoBack aria-label="Go Back" />

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, PageRendererProps } from 'gatsby';
+import { graphql, HeadFC, PageRendererProps } from 'gatsby';
 import { Options } from '@contentful/rich-text-react-renderer';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 
@@ -51,6 +51,18 @@ const options: Options = {
   // renderText: text => text.replace('!', '?'),
 };
 
+export const Head: HeadFC<Query> = ({ data }) => {
+  const skillName = data?.contentfulSkill?.skillName ?? '';
+
+  return (
+    <SEO description="Skill page" title={skillName}>
+      <title>
+        {data?.site?.siteMetadata?.title} | {skillName}
+      </title>
+    </SEO>
+  );
+};
+
 const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
   const body = data?.contentfulSkill?.content;
   const skillName = data?.contentfulSkill?.skillName ?? '';
@@ -60,7 +72,6 @@ const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
 
   return (
     <Layout location={location} data={author as ContentfulPerson}>
-      <SEO description="Skill page" title={skillName} />
       <Main className="px-6 py-8">
         <StyledLink to="/#skills" className="group">
           <div className="group">
@@ -109,6 +120,11 @@ export const pageQuery = graphql`
           height: 192
           width: 192
         )
+      }
+    }
+    site {
+      siteMetadata {
+        title
       }
     }
   }

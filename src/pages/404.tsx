@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, PageRendererProps } from 'gatsby';
-import { Helmet } from 'react-helmet';
+import { graphql, HeadFC, PageRendererProps } from 'gatsby';
 import Layout from '../components/layout';
 import { GoBack, StyledLink } from '../components/styled-go-back';
 
 import { Main } from '../components';
+import { SEO } from '../components/seo';
 
 import { Query, ContentfulPerson } from '../../graphql-types';
 
@@ -12,15 +12,17 @@ interface Props extends PageRendererProps {
   data: Query;
 }
 
+export const Head: HeadFC<Query> = ({ data }) => (
+  <SEO description="No content" title="No content">
+    <title>{data?.site?.siteMetadata?.title} | 404 No Content</title>
+  </SEO>
+);
+
 const NoughtsAndCrosses: FunctionComponent<Props> = ({ data, location }) => {
   const author = data.contentfulPerson;
 
   return (
     <Layout location={location} data={author as ContentfulPerson}>
-      <Helmet title="No Content">
-        <html lang="en" />
-        <meta name="description" content="No content" />
-      </Helmet>
       <Main className="px-6 py-8 w-full">
         <StyledLink to="/" className="group">
           <GoBack aria-label="Go Back" />
@@ -47,6 +49,11 @@ export const pageQuery = graphql`
           height: 192
           width: 192
         )
+      }
+    }
+    site {
+      siteMetadata {
+        title
       }
     }
   }
