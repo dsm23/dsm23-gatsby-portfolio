@@ -70,6 +70,10 @@ Run a production build into `./public` and publish the site to GitHub pages.
 
 Removes all dependencies, scripts and data from the installation script.
 
+### `netlify deploy`
+
+Deploy using the global netlify package.
+
 ## Roadmap
 
 - [x] [make the starter completely responsive](https://github.com/contentful-userland/gatsby-contentful-starter/issues/2)
