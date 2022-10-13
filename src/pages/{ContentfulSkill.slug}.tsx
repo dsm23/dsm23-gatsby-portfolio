@@ -9,10 +9,9 @@ import { Anchor } from '../components/anchor';
 import Layout from '../components/layout';
 import { Main } from '../components/main';
 import { SEO } from '../components/seo';
-import { GoBack, StyledLink } from '../components/styled-go-back';
+import { StyledLink } from '../components/styled-go-back';
+import { GoBack } from '../components/svgs';
 import { ContentfulPerson, Query } from '../../graphql-types';
-
-import 'twin.macro';
 
 import { EmptyStar, FilledStar } from '../components/svgs';
 
@@ -21,7 +20,7 @@ interface Props extends PageRendererProps {
 }
 
 const Bold: FunctionComponent = ({ children }) => (
-  <span tw="text-gray-900 font-bold">{children}</span>
+  <span className="text-gray-900 font-bold">{children}</span>
 );
 
 const options: Options = {
@@ -30,15 +29,15 @@ const options: Options = {
   },
   renderNode: {
     [BLOCKS.PARAGRAPH]: (_, children) => (
-      <p tw="mt-2 text-gray-900">{children}</p>
+      <p className="mt-2 text-gray-900">{children}</p>
     ),
     [BLOCKS.UL_LIST]: (_, children) => (
-      <ul tw="my-2 list-disc list-outside">{children}</ul>
+      <ul className="my-2 list-disc list-outside">{children}</ul>
     ),
-    [BLOCKS.LIST_ITEM]: (_, children) => <li tw="ml-8">{children}</li>,
+    [BLOCKS.LIST_ITEM]: (_, children) => <li className="ml-8">{children}</li>,
     // [BLOCKS.EMBEDDED_ASSET]: (node: any) => (
     //   <Image
-    //     tw="text-center shadow-lg mx-auto max-w-screen-md"
+    //     className="text-center shadow-lg mx-auto max-w-screen-md"
     //     contentfulId={node?.data?.target?.sys?.contentful_id}
     //   />
     // ),
@@ -74,9 +73,7 @@ const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
     <Layout location={location} data={author as ContentfulPerson}>
       <Main className="px-6 py-8">
         <StyledLink to="/#skills" className="group">
-          <div className="group">
-            <GoBack aria-label="Go Back" />
-          </div>
+          <GoBack className="styled-go-back" aria-label="Go Back" />
         </StyledLink>
 
         <h1 className="text-4xl">

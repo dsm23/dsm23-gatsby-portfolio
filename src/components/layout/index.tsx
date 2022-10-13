@@ -3,9 +3,6 @@ import Scrollspy from 'react-scrollspy';
 import { Link, PageRendererProps } from 'gatsby';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 
-import 'twin.macro';
-import 'styled-components/macro';
-
 import { SideNav } from '../sidenav';
 import { SideNavLink, SideNavSpan } from '../sidenav-link';
 
@@ -53,10 +50,9 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
             scrollTo(`#${label}`);
             return handleClose();
           }}
-          className="group"
-          tw="flex items-center justify-start lg:justify-center uppercase w-full px-3 py-2 rounded hover:(bg-gray-900 text-white) focus:outline-none"
+          className="group flex items-center justify-start lg:justify-center uppercase w-full px-3 py-2 rounded hover:(bg-gray-900 text-white) focus:outline-none"
         >
-          <SideNavSpan tw="px-1 py-px">{label}</SideNavSpan>
+          <SideNavSpan className="px-1 py-px">{label}</SideNavSpan>
         </SideNavLink>
       ))}
     </Scrollspy>
@@ -66,10 +62,9 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
         as={Link}
         key={`${label}-sidenav`}
         to={`/#${label}`}
-        className="group"
-        tw="flex items-center justify-start lg:justify-center uppercase w-full px-3 py-2 rounded hover:(bg-gray-900 text-white) focus:outline-none"
+        className="group flex items-center justify-start lg:justify-center uppercase w-full px-3 py-2 rounded hover:(bg-gray-900 text-white) focus:outline-none"
       >
-        <SideNavSpan tw="px-1 py-px text-gray-400">{label}</SideNavSpan>
+        <SideNavSpan className="px-1 py-px text-gray-400">{label}</SideNavSpan>
       </SideNavLink>
     ))
   );

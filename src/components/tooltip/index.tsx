@@ -1,73 +1,8 @@
 import React, { useState, FunctionComponent, ReactNode } from 'react';
-import tw, { styled, theme } from 'twin.macro';
-import { keyframes } from 'styled-components';
-
 import { Manager, Reference, Popper, PopperChildrenProps } from 'react-popper';
 
-export const ReferenceBox = tw.div`flex flex-col justify-center items-center bg-white text-gray-900 rounded relative z-10`;
-
-export const PopperBox = tw.div`flex flex-col justify-center items-center text-white h-0 w-40 p-12 text-center rounded-lg bg-gray-700`;
-
-export const TransitionedPopperBox = tw(
-  PopperBox,
-)`transition-all duration-75 ease-in-out`;
-
-export const fadeIn = keyframes`
-  from { opacity: 0; }
-  to   { opacity: 1; }
-`;
-export const PoppersContainer = styled('div')`
-  ${tw`z-50 opacity-0`}
-  animation: ${fadeIn} 0.3s ease-in 0.5s forwards;
-`;
-
-export const Arrow = styled('div')`
-  ${tw`absolute w-12 h-12`}
-  &[data-placement*='bottom'] {
-    ${tw`top-0 left-0`}
-    margin-top: -0.9em;
-    &::before {
-      border-width: 0 1.5em 1em 1.5em;
-      border-color: transparent transparent ${theme`colors.gray.700`}
-        transparent;
-    }
-  }
-  &[data-placement*='top'] {
-    ${tw`bottom-0 left-0`}
-    margin-bottom: -2.9em;
-    &::before {
-      border-width: 1em 1.5em 0 1.5em;
-      border-color: ${theme`colors.gray.700`} transparent transparent
-        transparent;
-    }
-  }
-  &[data-placement*='right'] {
-    ${tw`left-0`}
-    margin-left: -1.9em;
-    &::before {
-      border-width: 1.5em 1em 1.5em 0;
-      border-color: transparent ${theme`colors.gray.700`} transparent
-        transparent;
-    }
-  }
-  &[data-placement*='left'] {
-    ${tw`right-0`}
-    margin-right: -1.9em;
-    &::before {
-      border-width: 1.5em 0 1.5em 1em;
-      border-color: transparent transparent transparent
-        ${theme`colors.gray.700`};
-    }
-  }
-  &::before {
-    content: '';
-    margin: auto;
-    display: block;
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-`;
+import { ReferenceBox } from './ReferenceBox';
+import { PopperBox } from './PopperBox';
 
 interface Props {
   tooltipNode: ReactNode;
@@ -125,20 +60,25 @@ const Tooltip: FunctionComponent<Props> = ({ children, tooltipNode }) => {
       </Reference>
 
       {open && (
-        <PoppersContainer>
+        <div className="popper-container">
           <Popper placement="top" modifiers={modifiers}>
             {({ ref, style, placement, arrowProps }: PopperChildrenProps) => (
-              <TransitionedPopperBox ref={ref} style={style}>
+              <PopperBox
+                ref={ref}
+                style={style}
+                className="transition-all duration-75 ease-in-out"
+              >
                 {tooltipNode}
-                <Arrow
+                <div
+                  className="arrow"
                   ref={arrowProps.ref}
                   data-placement={placement}
                   style={arrowProps.style}
                 />
-              </TransitionedPopperBox>
+              </PopperBox>
             )}
           </Popper>
-        </PoppersContainer>
+        </div>
       )}
     </Manager>
   );

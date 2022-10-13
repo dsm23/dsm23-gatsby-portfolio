@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { graphql, HeadFC, PageRendererProps } from 'gatsby';
 import Layout from '../components/layout';
-import { GoBack, StyledLink } from '../components/styled-go-back';
+import { StyledLink } from '../components/styled-go-back';
+import { GoBack } from '../components/svgs';
 
 import { Main } from '../components';
 import { SEO } from '../components/seo';
@@ -25,7 +26,7 @@ const NoughtsAndCrosses: FunctionComponent<Props> = ({ data, location }) => {
     <Layout location={location} data={author as ContentfulPerson}>
       <Main className="px-6 py-8 w-full">
         <StyledLink to="/" className="group">
-          <GoBack aria-label="Go Back" />
+          <GoBack className="styled-go-back" aria-label="Go Back" />
         </StyledLink>
         <h1 className="text-4xl text-teal-600 tracking-widest uppercase">
           Error 404: No content

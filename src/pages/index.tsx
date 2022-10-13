@@ -1,9 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { graphql, HeadFC, PageRendererProps } from 'gatsby';
 
-import 'twin.macro';
-import 'styled-components/macro';
-
 import Layout from '../components/layout';
 import { SEO } from '../components/seo';
 
@@ -47,7 +44,7 @@ const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
   return (
     <Layout location={location} data={author as ContentfulPerson}>
       <Main>
-        <Home id="home" tw="mt-64" author={author as ContentfulPerson} />
+        <Home id="home" className="mt-64" author={author as ContentfulPerson} />
         <Divisor />
 
         <Experience id="experience" experiences={experiences} />
