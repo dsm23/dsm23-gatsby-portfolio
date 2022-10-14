@@ -39,7 +39,6 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-graphql-codegen',
     'gatsby-plugin-netlify',
-    'gatsby-plugin-styled-components',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-smoothscroll',
