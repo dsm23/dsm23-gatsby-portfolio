@@ -26,7 +26,7 @@ const ReferenceBox: <E extends ElementType = typeof defaultElement>(
   ) => (
     <Component
       className={clsx(
-        'flex flex-col justify-center items-center bg-white text-gray-900 rounded relative z-10',
+        'flex flex-col justify-center items-center bg-white text-gray-900 rounded relative',
         className,
       )}
       ref={ref}

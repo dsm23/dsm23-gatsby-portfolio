@@ -18,7 +18,7 @@ export type Props<E extends ElementType> = PlymorphicProps<E> &
 const defaultElementNavLink = 'a';
 const defaultElementNavSpan = 'span';
 
-const SideNavLink: <E extends ElementType = typeof defaultElementNavLink>(
+const NavLink: <E extends ElementType = typeof defaultElementNavLink>(
   props: Props<E>,
 ) => ReactElement | null = forwardRef(
   (
@@ -40,7 +40,7 @@ const SideNavLink: <E extends ElementType = typeof defaultElementNavLink>(
   ),
 );
 
-const SideNavSpan: <E extends ElementType = typeof defaultElementNavSpan>(
+const NavSpan: <E extends ElementType = typeof defaultElementNavSpan>(
   props: Props<E>,
 ) => ReactElement | null = forwardRef(
   (
@@ -62,4 +62,4 @@ const SideNavSpan: <E extends ElementType = typeof defaultElementNavSpan>(
   ),
 );
 
-export { SideNavLink, SideNavSpan };
+export { NavLink, NavSpan };
