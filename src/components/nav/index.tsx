@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import { KeyValuePair } from 'tailwindcss/types/config.js';
+import { ResizeObserver } from 'resize-observer';
 import tailwindConfig from '../../../tailwind.config.js';
 import { Link } from '../link';
 import { Cross, Hamburger } from '../svgs';
