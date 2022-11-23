@@ -27,7 +27,6 @@
     "gatsby-transformer-sharp": "^4.23.1",
     "graphql": "^15.8.0",
     "gsap": "^3.11.3",
-    "lottie-web": "5.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-popper": "^2.3.0",
