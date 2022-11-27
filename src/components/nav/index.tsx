@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { easing } from 'ts-easing';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import { KeyValuePair } from 'tailwindcss/types/config.js';
 import { ResizeObserver } from 'resize-observer';
 import tailwindConfig from '../../../tailwind.config.js';
 import { Link } from '../link';
 import { Cross, Hamburger } from '../svgs';
+import { useTween } from '../../utils/useTween';
 import { ContentfulPerson } from '../../../graphql-types';
 
 import * as styles from './styles.module.css';
@@ -20,34 +21,25 @@ interface Props {
 const fullConfig = resolveConfig(tailwindConfig);
 
 const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
-  const [height, setHeight] = useState(0);
+  const [height, setHeight] = useTween(0, {
+    easing: easing.inOutCirc,
+    duration: 400,
+  });
   const [isMobile, setMobile] = useState(false);
 
   const mobileContainerRef = useRef<HTMLDivElement>(null);
   const mobileHeightRef = useRef<HTMLDivElement>(null);
 
-  const tween = useRef<gsap.core.Tween | null>(null);
-
   const resizeObserver = new ResizeObserver(entries => {
-    for (const entry of entries) {
+    for (const _ of entries) {
       setMobile(
         window.matchMedia(
-          `(min-width: ${
+          `(max-width: ${
             (fullConfig.theme?.screens as KeyValuePair<string, string>)
               ?.md as string
           })`,
         ).matches,
       );
-      if (entry.contentBoxSize) {
-        // Firefox implements `contentBoxSize` as a single content rect, rather than an array
-        const contentBoxSize = Array.isArray(entry.contentBoxSize)
-          ? entry.contentBoxSize[0]
-          : entry.contentBoxSize;
-
-        setHeight(contentBoxSize.blockSize);
-      } else {
-        setHeight(entry.contentRect.height);
-      }
     }
   });
 
@@ -59,31 +51,14 @@ const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
   }, []);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      tween.current = gsap.fromTo(
-        mobileContainerRef.current,
-        {
-          height: 0,
-        },
-        {
-          height,
-          duration: 0.4,
-          ease: 'circ.inOut',
-          paused: true,
-        },
-      );
-    }, mobileContainerRef);
-
-    return () => ctx.revert();
-  }, [height]);
-
-  useEffect(() => {
-    if (open) {
-      tween.current!.play();
-    } else {
-      tween.current!.reverse();
+    if (isMobile) {
+      if (open) {
+        setHeight(mobileHeightRef.current?.offsetHeight!);
+      } else {
+        setHeight(0);
+      }
     }
-  }, [open, isMobile]);
+  }, [isMobile, open]);
 
   return (
     <div className={styles.container}>
@@ -119,6 +94,9 @@ const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
         <div
           className="h-0 overflow-hidden md:contents"
           ref={mobileContainerRef}
+          style={{
+            height,
+          }}
         >
           <div className="pt-2 md:contents" ref={mobileHeightRef}>
             {children}
