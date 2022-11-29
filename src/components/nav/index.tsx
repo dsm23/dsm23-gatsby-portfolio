@@ -45,8 +45,11 @@ const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
 
   useEffect(() => {
     resizeObserver.observe(mobileHeightRef.current!);
+
+    // HACK: so ref is not null onDestroy
+    const ref = mobileHeightRef.current!;
     return () => {
-      resizeObserver.unobserve(mobileHeightRef.current!);
+      resizeObserver.unobserve(ref);
     };
   }, []);
 
