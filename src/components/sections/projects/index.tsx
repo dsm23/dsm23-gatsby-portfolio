@@ -47,6 +47,11 @@ const projects: Project[] = [
     description:
       'AustinShow uses a video call app to do a battle royale style show. During the elimination stage he introduces a bottom three stage that can sometimes be hard to follow',
   },
+  {
+    title: 'D3.js pie chart',
+    to: '/pie-chart',
+    description: 'Pie chart in svg using D3.js',
+  },
 ];
 
 const Projects: FunctionComponent<HTMLAttributes<HTMLElement>> = props => (
