@@ -40,3 +40,13 @@
     display: none;
   }
 }
+
+@media print {
+  .container {
+    @apply static;
+  }
+
+  .icon {
+    @apply hidden;
+  }
+}
