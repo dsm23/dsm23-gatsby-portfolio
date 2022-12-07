@@ -75,10 +75,10 @@ const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
           image={data.image?.gatsbyImage}
         />
 
-        <span className="hidden ml-4 md:inline lg:hidden text-xl text-white font-bold tracking-wide">
+        <span className="hidden ml-4 print:inline md:inline lg:hidden text-xl text-white font-bold tracking-wide">
           David Murdoch
         </span>
-        <span className="inline ml-4 md:hidden text-xl text-white font-bold tracking-wide">
+        <span className="inline ml-4 print:hidden md:hidden text-xl text-white font-bold tracking-wide">
           DSM
         </span>
       </Link>

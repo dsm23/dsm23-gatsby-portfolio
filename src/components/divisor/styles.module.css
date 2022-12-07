@@ -1,0 +1,9 @@
+.divisor {
+  @apply w-full text-sky-200 lg:px-28;
+}
+
+@media print {
+  .divisor {
+    display: none;
+  }
+}

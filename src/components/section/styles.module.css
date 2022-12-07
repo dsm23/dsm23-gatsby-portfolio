@@ -1,0 +1,25 @@
+.section {
+  @apply w-full;
+}
+
+.centering {
+  @apply flex items-center justify-center content-center;
+}
+
+@supports (min-height: 100dvh) {
+  .section, .centering {
+    min-height: calc(100dvh - 68px);
+  }
+
+  @media screen(lg) {
+    .section, .centering {
+      min-height: 100vh;
+    }
+  }
+}
+
+@media print {
+  .section, .centering {
+    min-height: auto;
+  }
+}

@@ -7,6 +7,8 @@ import React, {
 } from 'react';
 import clsx from 'clsx';
 
+import * as styles from './styles.module.css';
+
 export type PlymorphicProps<E extends ElementType = ElementType> = {
   as?: E;
   className?: string;
@@ -25,10 +27,7 @@ const Anchor: <E extends ElementType = typeof defaultElement>(
     ref: Ref<Element>,
   ) => (
     <Component
-      className={clsx(
-        'text-teal-900 hover:underline outline-none focus:bg-yellow-500 focus:rounded px-1 -mx-1',
-        className,
-      )}
+      className={clsx(styles.anchor, className)}
       ref={ref}
       {...props}
     />

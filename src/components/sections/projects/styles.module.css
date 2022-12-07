@@ -1,0 +1,17 @@
+.imgContainer {
+  @apply isolation-auto relative pb-5/6;
+}
+
+.cardContainer {
+  @apply isolate px-4 -mt-16;
+}
+
+@media print {
+  .imgContainer {
+    display: none;
+  }
+  
+  .cardContainer {
+    margin-top: 0;
+  }
+}

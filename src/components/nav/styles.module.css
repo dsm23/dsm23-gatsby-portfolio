@@ -1,5 +1,5 @@
 .container {
-  @apply p-3 grid items-center justify-between bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 w-full top-0 fixed z-10 isolate;
+  @apply p-3 grid items-center justify-between bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 w-full top-0 sticky z-10 isolate;
   grid-template-areas:
     "profile icon"
     "sections sections";
@@ -31,6 +31,7 @@
 @media screen(lg) {
   .container {
     @apply h-full w-64 content-center justify-center;
+    min-height: 100dvh;
     grid-template-areas:
       "profile"
       "sections";
@@ -43,10 +44,10 @@
 
 @media print {
   .container {
-    @apply static;
+    display: static;
   }
 
   .icon {
-    @apply hidden;
+    display: none;
   }
 }

@@ -44,7 +44,7 @@ const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
   return (
     <Layout location={location} data={author as ContentfulPerson}>
       <Main>
-        <Home id="home" className="mt-64" author={author as ContentfulPerson} />
+        <Home id="home" author={author as ContentfulPerson} />
         <Divisor />
 
         <Experience id="experience" experiences={experiences} />

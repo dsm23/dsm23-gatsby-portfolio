@@ -6,6 +6,8 @@ import React, {
   useState,
 } from 'react';
 
+import * as styles from './styles.module.css';
+
 type Props = SVGAttributes<SVGSVGElement>;
 
 const Divisor: FunctionComponent<Props> = props => {
@@ -59,7 +61,7 @@ const Divisor: FunctionComponent<Props> = props => {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 260 50"
-      className="w-100 text-sky-200 lg:px-28"
+      className={styles.divisor}
       stroke="currentColor"
     >
       <path

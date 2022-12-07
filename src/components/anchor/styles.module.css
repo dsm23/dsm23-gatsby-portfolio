@@ -1,0 +1,9 @@
+.anchor {
+  @apply text-teal-900 hover:underline outline-none focus:bg-yellow-500 focus:rounded px-1 -mx-1;
+}
+
+@media print {
+  .anchor {
+    text-decoration: underline;
+  }
+}

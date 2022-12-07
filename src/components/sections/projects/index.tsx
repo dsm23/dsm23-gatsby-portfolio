@@ -5,6 +5,8 @@ import { Section } from '../../section';
 import { Help, NavRight } from '../../svgs';
 import { internal } from '../../../utils';
 
+import * as styles from './styles.module.css';
+
 interface Project {
   title: string;
   to: string;
@@ -60,10 +62,10 @@ const Projects: FunctionComponent<HTMLAttributes<HTMLElement>> = props => (
     <div className="flex flex-wrap">
       {projects.map(({ title, to, description }) => (
         <div className="w-full sm:w-1/2 md:w-1/3" key={title}>
-          <div className="relative pb-5/6">
+          <div className={styles.imgContainer}>
             <Help className="absolute h-full w-full object-cover rounded-lg shadow-md" />
           </div>
-          <div className="relative px-4 -mt-16">
+          <div className={styles.cardContainer}>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="flex items-baseline">
                 <div className="text-gray-600 text-xs uppercase font-semibold tracking-wide">
