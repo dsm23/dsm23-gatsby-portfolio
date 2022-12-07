@@ -7091,6 +7091,11 @@ export type NoughtsAndCrossesQueryQueryVariables = Exact<{ [key: string]: never;
 
 export type NoughtsAndCrossesQueryQuery = { site?: { siteMetadata?: { title?: string | null } | null } | null, contentfulPerson?: { name?: string | null, image?: { gatsbyImage?: any | null } | null } | null };
 
+export type PieChartQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PieChartQueryQuery = { site?: { siteMetadata?: { title?: string | null } | null } | null, contentfulPerson?: { name?: string | null, image?: { gatsbyImage?: any | null } | null } | null };
+
 export type PageBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
