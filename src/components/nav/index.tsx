@@ -5,8 +5,8 @@ import resolveConfig from 'tailwindcss/resolveConfig';
 import { KeyValuePair } from 'tailwindcss/types/config.js';
 import { ResizeObserver } from 'resize-observer';
 import tailwindConfig from '../../../tailwind.config.js';
+import Hamburger from '../hamburger';
 import { Link } from '../link';
-import { Cross, Hamburger } from '../svgs';
 import { useTween } from '../../utils/useTween';
 import { ContentfulPerson } from '../../../graphql-types';
 
@@ -87,9 +87,10 @@ const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
           aria-label="Open the navigation menu"
           onClick={onToggle}
           className="p-1 flex items-center justify-center rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
+          aria-controls="primary-navigation"
+          aria-expanded={open}
         >
-          {!open && <Hamburger className="block h-6 w-6" />}
-          {open && <Cross className="block h-6 w-6" />}
+          <Hamburger className="h-6 w-6" open={open} />
         </button>
       </div>
 

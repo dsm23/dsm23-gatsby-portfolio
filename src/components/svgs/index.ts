@@ -4,6 +4,5 @@ export * from './empty-star';
 export * from './filled-star';
 export * from './github';
 export * from './go-back';
-export * from './hamburger';
 export * from './help';
 export * from './nav-right';
