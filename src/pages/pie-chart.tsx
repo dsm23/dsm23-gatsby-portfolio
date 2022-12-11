@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { graphql, HeadFC, PageRendererProps } from 'gatsby';
+import { graphql, HeadFC, PageProps } from 'gatsby';
 import { generateProgrammingLanguageStats } from '@nivo/generators';
 import { ResponsivePie } from '@nivo/pie';
 import Layout from '../components/layout';
@@ -9,19 +9,13 @@ import { GoBack } from '../components/svgs';
 import { Main } from '../components';
 import { SEO } from '../components/seo';
 
-import { Query, ContentfulPerson } from '../../graphql-types';
+interface Props extends PageProps<Queries.PieChartQuery> {}
 
-interface Props extends PageRendererProps {
-  data: Query;
-}
-
-export const Head: HeadFC<Query> = ({ data }) => {
-  const skillName = data?.contentfulSkill?.skillName ?? '';
-
+export const Head: HeadFC<Queries.PieChartQuery> = ({ data }) => {
   return (
     <SEO
       description="The pie chart D3.js example in David Murdoch's portfolio"
-      title={skillName}
+      title="Pie Chart"
     >
       <title>{data?.site?.siteMetadata?.title} | Pie Chart</title>
     </SEO>
@@ -44,7 +38,7 @@ const PieChart: FunctionComponent<Props> = ({ data, location }) => {
   };
 
   return (
-    <Layout location={location} data={author as ContentfulPerson}>
+    <Layout location={location} data={author as Queries.ContentfulPerson}>
       <Main className="px-6 py-8 w-full">
         <StyledLink to="/#projects" className="group">
           <GoBack className="styled-go-back" aria-label="Go Back" />
@@ -195,7 +189,7 @@ const PieChart: FunctionComponent<Props> = ({ data, location }) => {
 export default PieChart;
 
 export const pageQuery = graphql`
-  query PieChartQuery {
+  query PieChart {
     site {
       siteMetadata {
         title

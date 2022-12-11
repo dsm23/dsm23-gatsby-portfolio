@@ -3,7 +3,7 @@ import React, {
   ButtonHTMLAttributes,
   useState,
 } from 'react';
-import { graphql, HeadFC, PageRendererProps } from 'gatsby';
+import { graphql, HeadFC, PageProps } from 'gatsby';
 import clsx from 'clsx';
 import { Anchor } from '../components/anchor';
 import Layout from '../components/layout';
@@ -12,8 +12,6 @@ import { GoBack } from '../components/svgs';
 
 import { Main } from '../components';
 import { SEO } from '../components/seo';
-
-import { Query, ContentfulPerson } from '../../graphql-types';
 
 type Squares = (null | 'X' | 'O')[];
 
@@ -166,17 +164,13 @@ function calculateWinner(squares: Squares) {
   return null;
 }
 
-interface Props extends PageRendererProps {
-  data: Query;
-}
+interface Props extends PageProps<Queries.NoughtsAndCrossesQuery> {}
 
-export const Head: HeadFC<Query> = ({ data }) => {
-  const skillName = data?.contentfulSkill?.skillName ?? '';
-
+export const Head: HeadFC<Queries.NoughtsAndCrossesQuery> = ({ data }) => {
   return (
     <SEO
       description="The noughts and crosses project in David Murdoch's portfolio"
-      title={skillName}
+      title="Noughts and Crosses"
     >
       <title>{data?.site?.siteMetadata?.title} | Noughts and Crosses</title>
     </SEO>
@@ -187,7 +181,7 @@ const NoughtsAndCrosses: FunctionComponent<Props> = ({ data, location }) => {
   const author = data.contentfulPerson;
 
   return (
-    <Layout location={location} data={author as ContentfulPerson}>
+    <Layout location={location} data={author as Queries.ContentfulPerson}>
       <Main className="px-6 py-8 w-full">
         <StyledLink to="/#projects" className="group">
           <GoBack className="styled-go-back" aria-label="Go Back" />
@@ -213,7 +207,7 @@ const NoughtsAndCrosses: FunctionComponent<Props> = ({ data, location }) => {
 export default NoughtsAndCrosses;
 
 export const pageQuery = graphql`
-  query NoughtsAndCrossesQuery {
+  query NoughtsAndCrosses {
     site {
       siteMetadata {
         title

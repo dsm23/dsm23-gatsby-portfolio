@@ -1,14 +1,11 @@
 import React, { FunctionComponent, HTMLAttributes } from 'react';
-
-import { ContentfulPerson } from '../../../../graphql-types';
-
 import { Anchor } from '../../anchor';
 import { Section } from '../../section';
 import { SectionHeader } from '../../section-header';
 import { GitHub, CodeSandbox } from '../../svgs';
 
 interface Props extends HTMLAttributes<HTMLElement> {
-  author: ContentfulPerson;
+  author: Queries.ContentfulPerson;
 }
 
 const Home: FunctionComponent<Props> = ({ author, ...props }) => {

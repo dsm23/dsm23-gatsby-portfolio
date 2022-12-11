@@ -1,15 +1,13 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, ReactNode, useState } from 'react';
 import Scrollspy from 'react-scrollspy';
 import { Link, PageRendererProps } from 'gatsby';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 
 import { Nav } from '../nav';
 import { NavLink, NavSpan } from '../nav-link';
-
-import { ContentfulPerson } from '../../../graphql-types';
-
 interface Props extends PageRendererProps {
-  data: ContentfulPerson;
+  children: ReactNode;
+  data: Queries.ContentfulPerson;
 }
 
 const items = [

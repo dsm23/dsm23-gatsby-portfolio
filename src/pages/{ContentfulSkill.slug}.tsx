@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, HeadFC, PageRendererProps } from 'gatsby';
+import { graphql, HeadFC, PageProps } from 'gatsby';
 import { Options } from '@contentful/rich-text-react-renderer';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 
@@ -11,21 +11,16 @@ import { Main } from '../components/main';
 import { SEO } from '../components/seo';
 import { StyledLink } from '../components/styled-go-back';
 import { GoBack } from '../components/svgs';
-import { ContentfulPerson, Query } from '../../graphql-types';
 
 import { EmptyStar, FilledStar } from '../components/svgs';
 
-interface Props extends PageRendererProps {
-  data: Query;
-}
-
-const Bold: FunctionComponent = ({ children }) => (
-  <span className="text-gray-900 font-bold">{children}</span>
-);
+interface Props extends PageProps<Queries.PageBySlugQuery> {}
 
 const options: Options = {
   renderMark: {
-    [MARKS.BOLD]: text => <Bold>{text}</Bold>,
+    [MARKS.BOLD]: text => (
+      <span className="text-gray-900 font-bold">{text}</span>
+    ),
   },
   renderNode: {
     [BLOCKS.PARAGRAPH]: (_, children) => (
@@ -50,7 +45,7 @@ const options: Options = {
   // renderText: text => text.replace('!', '?'),
 };
 
-export const Head: HeadFC<Query> = ({ data }) => {
+export const Head: HeadFC<Queries.PageBySlugQuery> = ({ data }) => {
   const skillName = data?.contentfulSkill?.skillName ?? '';
 
   return (
@@ -70,7 +65,7 @@ const PageTemplate: FunctionComponent<Props> = ({ data, location }) => {
   const author = data.contentfulPerson;
 
   return (
-    <Layout location={location} data={author as ContentfulPerson}>
+    <Layout location={location} data={author as Queries.ContentfulPerson}>
       <Main className="px-6 py-8">
         <StyledLink to="/#skills" className="group">
           <GoBack className="styled-go-back" aria-label="Go Back" />

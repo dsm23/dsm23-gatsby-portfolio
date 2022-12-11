@@ -8,12 +8,11 @@ import tailwindConfig from '../../../tailwind.config.js';
 import Hamburger from '../hamburger';
 import { Link } from '../link';
 import { useTween } from '../../utils/useTween';
-import { ContentfulPerson } from '../../../graphql-types';
 
 import * as styles from './styles.module.css';
 
 interface Props {
-  data: ContentfulPerson;
+  data: Queries.ContentfulPerson;
   open: boolean;
   onToggle: () => void;
 }

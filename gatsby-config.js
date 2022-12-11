@@ -27,6 +27,7 @@ if (!spaceId || !accessToken) {
 const siteUrl = 'https://react-david-murdoch-portfolio.netlify.app/';
 
 module.exports = {
+  graphqlTypegen: true,
   siteMetadata: {
     title: 'David Murdoch Portfolio - React',
     siteUrl,
@@ -37,7 +38,6 @@ module.exports = {
   plugins: [
     'gatsby-plugin-image',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-graphql-codegen',
     'gatsby-plugin-netlify',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',

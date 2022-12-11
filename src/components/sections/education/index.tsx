@@ -1,10 +1,9 @@
 import React, { FunctionComponent, HTMLAttributes } from 'react';
 import { Section } from '../../section';
 import { formatYears } from '../../../utils';
-import { ContentfulEducationSchool } from '../../../../graphql-types';
 
 interface Props extends HTMLAttributes<HTMLElement> {
-  education: ContentfulEducationSchool[];
+  education: Queries.ContentfulEducationSchool[];
 }
 
 const Education: FunctionComponent<Props> = ({ education, ...props }) => {

@@ -1,10 +1,9 @@
 import React, { FunctionComponent, HTMLAttributes } from 'react';
 import { Section } from '../../section';
 import { formatYears } from '../../../utils';
-import { ContentfulExperienceCompany } from '../../../../graphql-types';
 
 interface Props extends HTMLAttributes<HTMLElement> {
-  experiences: ContentfulExperienceCompany[];
+  experiences: Queries.ContentfulExperienceCompany[];
 }
 
 const Experience: FunctionComponent<Props> = ({ experiences, ...props }) => {

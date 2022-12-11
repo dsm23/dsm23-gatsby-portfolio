@@ -1,8 +1,6 @@
 import React, { FunctionComponent, HTMLAttributes } from 'react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
-
 import { Section } from '../../section';
-import { Query } from '../../../../graphql-types';
 import { IconWrapper } from '../../icon-wrapper';
 import SVGLoader from './SVGLoader';
 import { Tooltip } from '../../tooltip';
@@ -10,8 +8,8 @@ import { Tooltip } from '../../tooltip';
 const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
   ...props
 }) => {
-  const { allContentfulSkill } = useStaticQuery<Query>(graphql`
-    query SkillsQuery {
+  const { allContentfulSkill } = useStaticQuery<Queries.SkillsQuery>(graphql`
+    query Skills {
       allContentfulSkill(sort: { order: ASC, fields: order }) {
         nodes {
           skillName

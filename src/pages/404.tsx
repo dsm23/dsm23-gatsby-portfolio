@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, HeadFC, PageRendererProps } from 'gatsby';
+import { graphql, HeadFC, PageProps } from 'gatsby';
 import Layout from '../components/layout';
 import { StyledLink } from '../components/styled-go-back';
 import { GoBack } from '../components/svgs';
@@ -7,13 +7,9 @@ import { GoBack } from '../components/svgs';
 import { Main } from '../components';
 import { SEO } from '../components/seo';
 
-import { Query, ContentfulPerson } from '../../graphql-types';
+interface Props extends PageProps<Queries.NoContentQuery> {}
 
-interface Props extends PageRendererProps {
-  data: Query;
-}
-
-export const Head: HeadFC<Query> = ({ data }) => (
+export const Head: HeadFC<Queries.NoContentQuery> = ({ data }) => (
   <SEO description="No content" title="No content">
     <title>{data?.site?.siteMetadata?.title} | 404 No Content</title>
   </SEO>
@@ -23,7 +19,7 @@ const NoughtsAndCrosses: FunctionComponent<Props> = ({ data, location }) => {
   const author = data.contentfulPerson;
 
   return (
-    <Layout location={location} data={author as ContentfulPerson}>
+    <Layout location={location} data={author as Queries.ContentfulPerson}>
       <Main className="px-6 py-8 w-full">
         <StyledLink to="/" className="group">
           <GoBack className="styled-go-back" aria-label="Go Back" />

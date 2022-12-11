@@ -8,8 +8,6 @@
 import React, { FunctionComponent } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import { Query } from '../../../graphql-types';
-
 import codeRef from '../../images/code.svg';
 
 interface Props {
@@ -22,9 +20,9 @@ const SEO: FunctionComponent<Props> = ({
   description = '',
   title,
 }) => {
-  const { site } = useStaticQuery<Query>(
+  const { site } = useStaticQuery<Queries.MetaSeoQuery>(
     graphql`
-      query {
+      query MetaSeo {
         site {
           siteMetadata {
             title

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, HeadFC, PageRendererProps } from 'gatsby';
+import { graphql, HeadFC, PageProps } from 'gatsby';
 import Layout from '../components/layout';
 import { StyledLink } from '../components/styled-go-back';
 import { GoBack } from '../components/svgs';
@@ -7,19 +7,13 @@ import { GoBack } from '../components/svgs';
 import { Main } from '../components';
 import { SEO } from '../components/seo';
 
-import { Query, ContentfulPerson } from '../../graphql-types';
+interface Props extends PageProps<Queries.FizzBuzzQuery> {}
 
-interface Props extends PageRendererProps {
-  data: Query;
-}
-
-export const Head: HeadFC<Query> = ({ data }) => {
-  const skillName = data?.contentfulSkill?.skillName ?? '';
-
+export const Head: HeadFC<Queries.FizzBuzzQuery> = ({ data }) => {
   return (
     <SEO
       description="The fizz buzz project in David Murdoch's portfolio"
-      title={skillName}
+      title="Fizz Buzz"
     >
       <title>{data?.site?.siteMetadata?.title} | FizzBuzz</title>
     </SEO>
@@ -48,7 +42,7 @@ const FizzBuzz: FunctionComponent<Props> = ({ data, location }) => {
   });
 
   return (
-    <Layout location={location} data={author as ContentfulPerson}>
+    <Layout location={location} data={author as Queries.ContentfulPerson}>
       <Main className="px-6 py-8 w-full">
         <StyledLink to="/#projects" className="group">
           <GoBack className="styled-go-back" aria-label="Go Back" />
@@ -95,7 +89,7 @@ const FizzBuzz: FunctionComponent<Props> = ({ data, location }) => {
 export default FizzBuzz;
 
 export const pageQuery = graphql`
-  query FizzBuzzQuery {
+  query FizzBuzz {
     site {
       siteMetadata {
         title

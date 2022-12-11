@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, HeadFC, PageRendererProps } from 'gatsby';
+import { graphql, HeadFC, PageProps } from 'gatsby';
 
 import Layout from '../components/layout';
 import { SEO } from '../components/seo';
@@ -15,19 +15,13 @@ import {
   Skills,
 } from '../components';
 
-import { Query, ContentfulPerson } from '../../graphql-types';
+interface Props extends PageProps<Queries.HomeQuery> {}
 
-interface Props extends PageRendererProps {
-  data: Query;
-}
-
-export const Head: HeadFC<Query> = ({ data }) => {
-  const skillName = data?.contentfulSkill?.skillName ?? '';
-
+export const Head: HeadFC<Queries.HomeQuery> = ({ data }) => {
   return (
     <SEO
       description="The react version of David Murdoch's portfolio built with tailwind and gatsby"
-      title={skillName}
+      title="Home"
     >
       <title>{data?.site?.siteMetadata?.title}</title>
     </SEO>
@@ -42,9 +36,9 @@ const RootIndex: FunctionComponent<Props> = ({ data, location }) => {
   const interests = data.allContentfulInterests.nodes;
 
   return (
-    <Layout location={location} data={author as ContentfulPerson}>
+    <Layout location={location} data={author as Queries.ContentfulPerson}>
       <Main>
-        <Home id="home" author={author as ContentfulPerson} />
+        <Home id="home" author={author as Queries.ContentfulPerson} />
         <Divisor />
 
         <Experience id="experience" experiences={experiences} />
@@ -78,7 +72,7 @@ export default RootIndex;
 // }
 
 export const pageQuery = graphql`
-  query HomeQuery {
+  query Home {
     site {
       siteMetadata {
         title
