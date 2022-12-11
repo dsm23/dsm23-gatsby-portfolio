@@ -1,8 +1,6 @@
-'use strict'
-
-const fs = require('fs')
-const path = require('path')
-let packageJSON = require(path.resolve(__dirname, '../package.json'))
+import fs from 'fs'
+import path from 'path'
+import packageJSON from "../package.json" assert { type: "json" };
 
 delete packageJSON.scripts['setup']
 delete packageJSON.scripts['postinstall']

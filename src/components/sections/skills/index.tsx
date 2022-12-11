@@ -10,7 +10,7 @@ const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
 }) => {
   const { allContentfulSkill } = useStaticQuery<Queries.SkillsQuery>(graphql`
     query Skills {
-      allContentfulSkill(sort: { order: ASC, fields: order }) {
+      allContentfulSkill(sort: { order: ASC }) {
         nodes {
           skillName
           rating

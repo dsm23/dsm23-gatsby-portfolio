@@ -1,5 +1,5 @@
-const chalk = require('chalk')
-const pkg = require('../package.json')
+import chalk from 'chalk'
+import pkg from "../package.json" assert { type: "json" };
 
 console.log(`
 

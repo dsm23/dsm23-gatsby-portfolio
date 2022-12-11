@@ -1,9 +1,9 @@
-const spaceImport = require('contentful-import')
-const exportFile = require('../contentful/export.json')
-const inquirer = require('inquirer')
-const chalk = require('chalk')
-const path = require('path')
-const { writeFileSync } = require('fs')
+import spaceImport from "contentful-import"
+import exportFile from "../contentful/export.json" assert { type: "json" }
+import inquirer from 'inquirer'
+import chalk from 'chalk'
+import path from 'path'
+import { writeFileSync } from 'fs'
 
 const argv = require('yargs-parser')(process.argv.slice(2))
 
