@@ -26,7 +26,6 @@
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.2.0",
     "gatsby-plugin-sitemap": "^6.2.0",
-    "gatsby-plugin-smoothscroll": "^1.2.0",
     "gatsby-plugin-typescript": "^5.2.0",
     "gatsby-source-contentful": "^8.2.0",
     "gatsby-transformer-sharp": "^5.2.0",

@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactNode, useState } from 'react';
 import Scrollspy from 'react-scrollspy';
 import { Link, PageRendererProps } from 'gatsby';
-import scrollTo from 'gatsby-plugin-smoothscroll';
 
 import { Nav } from '../nav';
 import { NavLink, NavSpan } from '../nav-link';
@@ -45,7 +44,9 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
           as="button"
           key={`${label}-nav`}
           onClick={() => {
-            scrollTo(`#${label}`);
+            document.getElementById(label)?.scrollIntoView({
+              behavior: 'smooth',
+            });
             return handleClose();
           }}
           className="group flex items-center justify-start lg:justify-center uppercase w-full py-2 rounded hover:bg-gray-900 hover:text-white focus:outline-none"

@@ -41,7 +41,6 @@ module.exports = {
     'gatsby-plugin-netlify',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-smoothscroll',
     'gatsby-plugin-postcss',
     'gatsby-plugin-typescript',
     {
