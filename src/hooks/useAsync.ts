@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export const useAsync = <T, E = string>(
+const useAsync = <T, E = string>(
   asyncFunction: () => Promise<T>,
   immediate = true,
 ) => {
@@ -32,3 +32,5 @@ export const useAsync = <T, E = string>(
   }, [execute, immediate]);
   return { execute, status, value, error };
 };
+
+export default useAsync;

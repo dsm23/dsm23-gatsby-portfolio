@@ -33,4 +33,4 @@ const useTween = (
   return [state, setTween];
 };
 
-export { useTween };
+export default useTween;

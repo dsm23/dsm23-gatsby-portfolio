@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import type { FunctionComponent, HTMLAttributes } from 'react';
-import { useAsync } from '../../../utils';
+import { useAsync } from '../../../hooks';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   src: string;

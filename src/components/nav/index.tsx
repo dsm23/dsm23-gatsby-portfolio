@@ -6,8 +6,7 @@ import { KeyValuePair } from 'tailwindcss/types/config.js'; // import { ResizeOb
 import tailwindConfig from '../../../tailwind.config.js';
 import Hamburger from '../hamburger';
 import { Link } from '../link';
-import { useTween } from '../../utils/useTween';
-import { useClickAway, useMedia } from '../../hooks';
+import { useClickAway, useMedia, useTween } from '../../hooks';
 
 import * as styles from './styles.module.css';
 
