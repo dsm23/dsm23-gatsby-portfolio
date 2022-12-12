@@ -61,7 +61,7 @@ const Nav: FunctionComponent<Props> = ({
       >
         <GatsbyImage
           className="aspect-square w-10 lg:w-48 rounded-full"
-          alt={`${data.name} profile`}
+          alt={`${data.name} profile.`}
           image={data.image?.gatsbyImage}
         />
 
