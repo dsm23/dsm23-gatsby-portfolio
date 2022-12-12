@@ -7,7 +7,7 @@ import tailwindConfig from '../../../tailwind.config.js';
 import Hamburger from '../hamburger';
 import { Link } from '../link';
 import { useTween } from '../../utils/useTween';
-import { useMedia } from '../../hooks';
+import { useClickAway, useMedia } from '../../hooks';
 
 import * as styles from './styles.module.css';
 
@@ -15,11 +15,18 @@ interface Props {
   data: Queries.ContentfulPerson;
   open: boolean;
   onToggle: () => void;
+  onClose: () => void;
 }
 
 const fullConfig = resolveConfig(tailwindConfig);
 
-const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
+const Nav: FunctionComponent<Props> = ({
+  children,
+  data,
+  onToggle,
+  onClose,
+  open,
+}) => {
   const [height, setHeight] = useTween(0, {
     easing: easing.inOutCirc,
     duration: 400,
@@ -27,6 +34,9 @@ const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
 
   const mobileContainerRef = useRef<HTMLDivElement>(null);
   const mobileHeightRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useClickAway(containerRef, () => void onClose());
 
   const isMobile = useMedia(
     `(max-width: ${
@@ -45,7 +55,7 @@ const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
   }, [isMobile, open]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
       <Link
         to="/#home"
         className="inline-flex items-center shadow-sm outline-none border-2 border-transparent lg:mr-0 lg:mb-4 lg:rounded-full lg:border-8 lg:border-teal-700 focus:border-yellow-500"

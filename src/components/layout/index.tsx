@@ -73,7 +73,12 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
   return (
     <div className="flex flex-col lg:flex-row font-sans w-full">
       <header className="contents">
-        <Nav data={data} open={open} onToggle={handleToggle}>
+        <Nav
+          data={data}
+          open={open}
+          onToggle={handleToggle}
+          onClose={handleClose}
+        >
           {renderNav}
         </Nav>
       </header>
