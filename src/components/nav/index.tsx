@@ -1,13 +1,13 @@
-import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
+import React, { FunctionComponent, useEffect, useRef } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { easing } from 'ts-easing';
 import resolveConfig from 'tailwindcss/resolveConfig';
-import { KeyValuePair } from 'tailwindcss/types/config.js';
-import { ResizeObserver } from 'resize-observer';
+import { KeyValuePair } from 'tailwindcss/types/config.js'; // import { ResizeObserver } from 'resize-observer';
 import tailwindConfig from '../../../tailwind.config.js';
 import Hamburger from '../hamburger';
 import { Link } from '../link';
 import { useTween } from '../../utils/useTween';
+import { useMedia } from '../../hooks';
 
 import * as styles from './styles.module.css';
 
@@ -24,33 +24,15 @@ const Nav: FunctionComponent<Props> = ({ children, data, onToggle, open }) => {
     easing: easing.inOutCirc,
     duration: 400,
   });
-  const [isMobile, setMobile] = useState(false);
 
   const mobileContainerRef = useRef<HTMLDivElement>(null);
   const mobileHeightRef = useRef<HTMLDivElement>(null);
 
-  const resizeObserver = new ResizeObserver(entries => {
-    for (const _ of entries) {
-      setMobile(
-        window.matchMedia(
-          `(max-width: ${
-            (fullConfig.theme?.screens as KeyValuePair<string, string>)
-              ?.md as string
-          })`,
-        ).matches,
-      );
-    }
-  });
-
-  useEffect(() => {
-    resizeObserver.observe(mobileHeightRef.current!);
-
-    // HACK: so ref is not null onDestroy
-    const ref = mobileHeightRef.current!;
-    return () => {
-      resizeObserver.unobserve(ref);
-    };
-  }, []);
+  const isMobile = useMedia(
+    `(max-width: ${
+      (fullConfig.theme?.screens as KeyValuePair<string, string>)?.md as string
+    })`,
+  );
 
   useEffect(() => {
     if (isMobile) {
