@@ -1,9 +1,15 @@
-import React, { FunctionComponent, ReactNode, useState } from 'react';
-import Scrollspy from 'react-scrollspy';
+import React, {
+  FunctionComponent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Link, PageRendererProps } from 'gatsby';
-
+import cx from 'clsx';
 import { Nav } from '../nav';
 import { NavLink, NavSpan } from '../nav-link';
+
 interface Props extends PageRendererProps {
   children: ReactNode;
   data: Queries.ContentfulPerson;
@@ -18,7 +24,14 @@ const items = [
   'interests',
 ];
 
+let options = {
+  rootMargin: '0px',
+  threshold: 0.25,
+};
+
 const Template: FunctionComponent<Props> = ({ children, data, location }) => {
+  const [activeId, setActiveId] = useState<string>();
+
   let rootPath = `/`;
   // if (typeof __PREFIX_PATHS__ !== `undefined` && __PREFIX_PATHS__) {
   //   rootPath = __PATH_PREFIX__ + `/`;
@@ -32,13 +45,33 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
 
   const isIndexPage = location.pathname === rootPath;
 
+  const observerCallback = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver,
+  ) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setActiveId(entry.target.id);
+      }
+    });
+  };
+
+  useEffect(() => {
+    let observer = new IntersectionObserver(observerCallback, options);
+
+    if (isIndexPage) {
+      items.forEach(
+        label => void observer.observe(document.getElementById(label)!),
+      );
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   const renderNav = isIndexPage ? (
-    <Scrollspy
-      items={items}
-      currentClassName="text-white bg-green-700"
-      componentTag="div"
-      className="block md:flex md:ml-auto md:w-auto w-full lg:items-center md:items-start lg:h-auto lg:block text-gray-400"
-    >
+    <div className="block md:flex md:ml-auto md:w-auto w-full lg:items-center md:items-start lg:h-auto lg:block text-gray-400">
       {items.map(label => (
         <NavLink
           as="button"
@@ -49,12 +82,15 @@ const Template: FunctionComponent<Props> = ({ children, data, location }) => {
             });
             return handleClose();
           }}
-          className="group flex items-center justify-start lg:justify-center uppercase w-full py-2 rounded hover:bg-gray-900 hover:text-white focus:outline-none"
+          className={cx(
+            'group flex items-center justify-start lg:justify-center uppercase w-full py-2 rounded hover:bg-gray-900 hover:text-white focus:outline-none',
+            { 'text-white bg-green-700': label === activeId },
+          )}
         >
           <NavSpan className="px-px py-px lg:px-0.5">{label}</NavSpan>
         </NavLink>
       ))}
-    </Scrollspy>
+    </div>
   ) : (
     items.map(label => (
       <NavLink
