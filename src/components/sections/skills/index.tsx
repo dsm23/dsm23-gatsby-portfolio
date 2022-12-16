@@ -3,7 +3,7 @@ import { graphql, Link, useStaticQuery } from 'gatsby';
 import { Section } from '../../section';
 import { IconWrapper } from '../../icon-wrapper';
 import SVGLoader from './SVGLoader';
-import { Tooltip } from '../../tooltip';
+import Tooltip from '../../tooltip';
 
 const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
   ...props
@@ -33,11 +33,10 @@ const Skills: FunctionComponent<HTMLAttributes<HTMLElement>> = ({
           return (
             <Link to={`/${slug}`} key={`${slug}-svg-icon`}>
               <span className="sr-only">{skillName}</span>
-              <Tooltip tooltipNode={skillName}>
-                <IconWrapper>
-                  <SVGLoader className="h-16 w-16" src={icon!.url as string} />
-                </IconWrapper>
-              </Tooltip>
+              <IconWrapper>
+                <SVGLoader className="h-16 w-16" src={icon!.url as string} />
+              </IconWrapper>
+              <Tooltip>{skillName}</Tooltip>
             </Link>
           );
         })}

@@ -3,4 +3,4 @@ export * from './main';
 export * from './section';
 export * from './sections';
 export * from './section-header';
-export * from './tooltip';
+export { default as Tooltip } from './tooltip';
