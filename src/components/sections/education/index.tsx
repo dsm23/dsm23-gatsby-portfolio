@@ -1,6 +1,9 @@
 import React, { FunctionComponent, HTMLAttributes } from 'react';
+import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { Section } from '../../section';
-import { formatYears } from '../../../utils';
+import { contentfulOptions, formatYears } from '../../../utils';
+
+import * as styles from './styles.module.css';
 
 interface Props extends HTMLAttributes<HTMLElement> {
   education: Queries.ContentfulEducationSchool[];
@@ -11,13 +14,15 @@ const Education: FunctionComponent<Props> = ({ education, ...props }) => {
     <Section {...props}>
       <h2 className="text-5xl">Education</h2>
       {education.map(({ schoolName, description, endDate, startDate }) => (
-        <div key={`${schoolName}-education`}>
-          <h3 className="text-3xl">{schoolName}</h3>
+        <div key={`${schoolName}-education`} className={styles.container}>
+          <h3 className={styles.school}>{schoolName}</h3>
           {description && (
-            <p className="text-gray-900">{description?.description}</p>
+            <div className={styles.description}>
+              {renderRichText(description, contentfulOptions)}
+            </div>
           )}
 
-          <div className="font-semibold text-teal-900">
+          <div className={styles.dates}>
             {formatYears(startDate as string, endDate as string)}
           </div>
         </div>

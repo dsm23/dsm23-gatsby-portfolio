@@ -1,0 +1,38 @@
+.container {
+  @apply mt-6;
+}
+
+.city {
+  @apply mt-px ml-2;
+  grid-area: city;
+}
+
+.company {
+  @apply text-3xl mt-4;
+  grid-area: company;
+}
+
+.dates {
+  @apply font-semibold text-teal-900 mt-2;
+  grid-area: dates;
+}
+
+.description {
+  @apply text-gray-900 mt-4;
+  grid-area: description;
+}
+
+@media screen(lg) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-template-areas: 
+      "company dates"
+      "city dates"
+      "description dates";
+  }
+
+  .dates {
+    @apply mt-0;
+  }
+}

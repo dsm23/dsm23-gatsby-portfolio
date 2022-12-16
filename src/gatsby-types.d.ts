@@ -667,14 +667,10 @@ type ContentfulContentTypeSysSortInput = {
 };
 
 type ContentfulEducationSchool = ContentfulEntry & ContentfulReference & Node & {
-  /** Returns the first child node of type contentfulEducationSchoolDescriptionTextNode or null if there are no children of given type on this node */
-  readonly childContentfulEducationSchoolDescriptionTextNode: Maybe<contentfulEducationSchoolDescriptionTextNode>;
   readonly children: ReadonlyArray<Node>;
-  /** Returns all children nodes filtered by type contentfulEducationSchoolDescriptionTextNode */
-  readonly childrenContentfulEducationSchoolDescriptionTextNode: Maybe<ReadonlyArray<Maybe<contentfulEducationSchoolDescriptionTextNode>>>;
   readonly contentful_id: Scalars['String'];
   readonly createdAt: Maybe<Scalars['Date']>;
-  readonly description: Maybe<contentfulEducationSchoolDescriptionTextNode>;
+  readonly description: Maybe<ContentfulEducationSchoolDescription>;
   readonly endDate: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly internal: Internal;
@@ -742,6 +738,22 @@ type ContentfulEducationSchoolConnection_sumArgs = {
   field: ContentfulEducationSchoolFieldSelector;
 };
 
+type ContentfulEducationSchoolDescription = {
+  readonly raw: Maybe<Scalars['String']>;
+};
+
+type ContentfulEducationSchoolDescriptionFieldSelector = {
+  readonly raw: InputMaybe<FieldSelectorEnum>;
+};
+
+type ContentfulEducationSchoolDescriptionFilterInput = {
+  readonly raw: InputMaybe<StringQueryOperatorInput>;
+};
+
+type ContentfulEducationSchoolDescriptionSortInput = {
+  readonly raw: InputMaybe<SortOrderEnum>;
+};
+
 type ContentfulEducationSchoolEdge = {
   readonly next: Maybe<ContentfulEducationSchool>;
   readonly node: ContentfulEducationSchool;
@@ -749,12 +761,10 @@ type ContentfulEducationSchoolEdge = {
 };
 
 type ContentfulEducationSchoolFieldSelector = {
-  readonly childContentfulEducationSchoolDescriptionTextNode: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFieldSelector>;
   readonly children: InputMaybe<NodeFieldSelector>;
-  readonly childrenContentfulEducationSchoolDescriptionTextNode: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFieldSelector>;
   readonly contentful_id: InputMaybe<FieldSelectorEnum>;
   readonly createdAt: InputMaybe<FieldSelectorEnum>;
-  readonly description: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFieldSelector>;
+  readonly description: InputMaybe<ContentfulEducationSchoolDescriptionFieldSelector>;
   readonly endDate: InputMaybe<FieldSelectorEnum>;
   readonly id: InputMaybe<FieldSelectorEnum>;
   readonly internal: InputMaybe<InternalFieldSelector>;
@@ -768,12 +778,10 @@ type ContentfulEducationSchoolFieldSelector = {
 };
 
 type ContentfulEducationSchoolFilterInput = {
-  readonly childContentfulEducationSchoolDescriptionTextNode: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFilterInput>;
   readonly children: InputMaybe<NodeFilterListInput>;
-  readonly childrenContentfulEducationSchoolDescriptionTextNode: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFilterListInput>;
   readonly contentful_id: InputMaybe<StringQueryOperatorInput>;
   readonly createdAt: InputMaybe<DateQueryOperatorInput>;
-  readonly description: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFilterInput>;
+  readonly description: InputMaybe<ContentfulEducationSchoolDescriptionFilterInput>;
   readonly endDate: InputMaybe<StringQueryOperatorInput>;
   readonly id: InputMaybe<StringQueryOperatorInput>;
   readonly internal: InputMaybe<InternalFilterInput>;
@@ -828,12 +836,10 @@ type ContentfulEducationSchoolGroupConnection_sumArgs = {
 };
 
 type ContentfulEducationSchoolSortInput = {
-  readonly childContentfulEducationSchoolDescriptionTextNode: InputMaybe<contentfulEducationSchoolDescriptionTextNodeSortInput>;
   readonly children: InputMaybe<NodeSortInput>;
-  readonly childrenContentfulEducationSchoolDescriptionTextNode: InputMaybe<contentfulEducationSchoolDescriptionTextNodeSortInput>;
   readonly contentful_id: InputMaybe<SortOrderEnum>;
   readonly createdAt: InputMaybe<SortOrderEnum>;
-  readonly description: InputMaybe<contentfulEducationSchoolDescriptionTextNodeSortInput>;
+  readonly description: InputMaybe<ContentfulEducationSchoolDescriptionSortInput>;
   readonly endDate: InputMaybe<SortOrderEnum>;
   readonly id: InputMaybe<SortOrderEnum>;
   readonly internal: InputMaybe<InternalSortInput>;
@@ -3319,7 +3325,6 @@ type Query = {
   readonly allContentfulBlogPost: ContentfulBlogPostConnection;
   readonly allContentfulContentType: ContentfulContentTypeConnection;
   readonly allContentfulEducationSchool: ContentfulEducationSchoolConnection;
-  readonly allContentfulEducationSchoolDescriptionTextNode: contentfulEducationSchoolDescriptionTextNodeConnection;
   readonly allContentfulEntry: ContentfulEntryConnection;
   readonly allContentfulExperienceCompany: ContentfulExperienceCompanyConnection;
   readonly allContentfulExperienceCompanyDescriptionTextNode: contentfulExperienceCompanyDescriptionTextNodeConnection;
@@ -3339,7 +3344,6 @@ type Query = {
   readonly contentfulBlogPost: Maybe<ContentfulBlogPost>;
   readonly contentfulContentType: Maybe<ContentfulContentType>;
   readonly contentfulEducationSchool: Maybe<ContentfulEducationSchool>;
-  readonly contentfulEducationSchoolDescriptionTextNode: Maybe<contentfulEducationSchoolDescriptionTextNode>;
   readonly contentfulEntry: Maybe<ContentfulEntry>;
   readonly contentfulExperienceCompany: Maybe<ContentfulExperienceCompany>;
   readonly contentfulExperienceCompanyDescriptionTextNode: Maybe<contentfulExperienceCompanyDescriptionTextNode>;
@@ -3387,14 +3391,6 @@ type Query_allContentfulEducationSchoolArgs = {
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
   sort: InputMaybe<ReadonlyArray<InputMaybe<ContentfulEducationSchoolSortInput>>>;
-};
-
-
-type Query_allContentfulEducationSchoolDescriptionTextNodeArgs = {
-  filter: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFilterInput>;
-  limit: InputMaybe<Scalars['Int']>;
-  skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<ReadonlyArray<InputMaybe<contentfulEducationSchoolDescriptionTextNodeSortInput>>>;
 };
 
 
@@ -3570,12 +3566,10 @@ type Query_contentfulContentTypeArgs = {
 
 
 type Query_contentfulEducationSchoolArgs = {
-  childContentfulEducationSchoolDescriptionTextNode: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFilterInput>;
   children: InputMaybe<NodeFilterListInput>;
-  childrenContentfulEducationSchoolDescriptionTextNode: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFilterListInput>;
   contentful_id: InputMaybe<StringQueryOperatorInput>;
   createdAt: InputMaybe<DateQueryOperatorInput>;
-  description: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFilterInput>;
+  description: InputMaybe<ContentfulEducationSchoolDescriptionFilterInput>;
   endDate: InputMaybe<StringQueryOperatorInput>;
   id: InputMaybe<StringQueryOperatorInput>;
   internal: InputMaybe<InternalFilterInput>;
@@ -3586,16 +3580,6 @@ type Query_contentfulEducationSchoolArgs = {
   startDate: InputMaybe<StringQueryOperatorInput>;
   sys: InputMaybe<ContentfulEducationSchoolSysFilterInput>;
   updatedAt: InputMaybe<DateQueryOperatorInput>;
-};
-
-
-type Query_contentfulEducationSchoolDescriptionTextNodeArgs = {
-  children: InputMaybe<NodeFilterListInput>;
-  description: InputMaybe<StringQueryOperatorInput>;
-  id: InputMaybe<StringQueryOperatorInput>;
-  internal: InputMaybe<InternalFilterInput>;
-  parent: InputMaybe<NodeFilterInput>;
-  sys: InputMaybe<contentfulEducationSchoolDescriptionTextNodeSysFilterInput>;
 };
 
 
@@ -4772,148 +4756,6 @@ type WebPOptions = {
   readonly quality: InputMaybe<Scalars['Int']>;
 };
 
-type contentfulEducationSchoolDescriptionTextNode = Node & {
-  readonly children: ReadonlyArray<Node>;
-  readonly description: Maybe<Scalars['String']>;
-  readonly id: Scalars['ID'];
-  readonly internal: Internal;
-  readonly parent: Maybe<Node>;
-  readonly sys: Maybe<contentfulEducationSchoolDescriptionTextNodeSys>;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeConnection = {
-  readonly distinct: ReadonlyArray<Scalars['String']>;
-  readonly edges: ReadonlyArray<contentfulEducationSchoolDescriptionTextNodeEdge>;
-  readonly group: ReadonlyArray<contentfulEducationSchoolDescriptionTextNodeGroupConnection>;
-  readonly max: Maybe<Scalars['Float']>;
-  readonly min: Maybe<Scalars['Float']>;
-  readonly nodes: ReadonlyArray<contentfulEducationSchoolDescriptionTextNode>;
-  readonly pageInfo: PageInfo;
-  readonly sum: Maybe<Scalars['Float']>;
-  readonly totalCount: Scalars['Int'];
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeConnection_distinctArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeConnection_groupArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-  limit: InputMaybe<Scalars['Int']>;
-  skip: InputMaybe<Scalars['Int']>;
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeConnection_maxArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeConnection_minArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeConnection_sumArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeEdge = {
-  readonly next: Maybe<contentfulEducationSchoolDescriptionTextNode>;
-  readonly node: contentfulEducationSchoolDescriptionTextNode;
-  readonly previous: Maybe<contentfulEducationSchoolDescriptionTextNode>;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeFieldSelector = {
-  readonly children: InputMaybe<NodeFieldSelector>;
-  readonly description: InputMaybe<FieldSelectorEnum>;
-  readonly id: InputMaybe<FieldSelectorEnum>;
-  readonly internal: InputMaybe<InternalFieldSelector>;
-  readonly parent: InputMaybe<NodeFieldSelector>;
-  readonly sys: InputMaybe<contentfulEducationSchoolDescriptionTextNodeSysFieldSelector>;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeFilterInput = {
-  readonly children: InputMaybe<NodeFilterListInput>;
-  readonly description: InputMaybe<StringQueryOperatorInput>;
-  readonly id: InputMaybe<StringQueryOperatorInput>;
-  readonly internal: InputMaybe<InternalFilterInput>;
-  readonly parent: InputMaybe<NodeFilterInput>;
-  readonly sys: InputMaybe<contentfulEducationSchoolDescriptionTextNodeSysFilterInput>;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeFilterListInput = {
-  readonly elemMatch: InputMaybe<contentfulEducationSchoolDescriptionTextNodeFilterInput>;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeGroupConnection = {
-  readonly distinct: ReadonlyArray<Scalars['String']>;
-  readonly edges: ReadonlyArray<contentfulEducationSchoolDescriptionTextNodeEdge>;
-  readonly field: Scalars['String'];
-  readonly fieldValue: Maybe<Scalars['String']>;
-  readonly group: ReadonlyArray<contentfulEducationSchoolDescriptionTextNodeGroupConnection>;
-  readonly max: Maybe<Scalars['Float']>;
-  readonly min: Maybe<Scalars['Float']>;
-  readonly nodes: ReadonlyArray<contentfulEducationSchoolDescriptionTextNode>;
-  readonly pageInfo: PageInfo;
-  readonly sum: Maybe<Scalars['Float']>;
-  readonly totalCount: Scalars['Int'];
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeGroupConnection_distinctArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeGroupConnection_groupArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-  limit: InputMaybe<Scalars['Int']>;
-  skip: InputMaybe<Scalars['Int']>;
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeGroupConnection_maxArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeGroupConnection_minArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-};
-
-
-type contentfulEducationSchoolDescriptionTextNodeGroupConnection_sumArgs = {
-  field: contentfulEducationSchoolDescriptionTextNodeFieldSelector;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeSortInput = {
-  readonly children: InputMaybe<NodeSortInput>;
-  readonly description: InputMaybe<SortOrderEnum>;
-  readonly id: InputMaybe<SortOrderEnum>;
-  readonly internal: InputMaybe<InternalSortInput>;
-  readonly parent: InputMaybe<NodeSortInput>;
-  readonly sys: InputMaybe<contentfulEducationSchoolDescriptionTextNodeSysSortInput>;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeSys = {
-  readonly type: Maybe<Scalars['String']>;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeSysFieldSelector = {
-  readonly type: InputMaybe<FieldSelectorEnum>;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeSysFilterInput = {
-  readonly type: InputMaybe<StringQueryOperatorInput>;
-};
-
-type contentfulEducationSchoolDescriptionTextNodeSysSortInput = {
-  readonly type: InputMaybe<SortOrderEnum>;
-};
-
 type contentfulExperienceCompanyDescriptionTextNode = Node & {
   readonly children: ReadonlyArray<Node>;
   readonly description: Maybe<Scalars['String']>;
@@ -5232,7 +5074,7 @@ type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: 
 type HomeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type HomeQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null } | null } | null, readonly contentfulPerson: { readonly email: string | null, readonly github: string | null, readonly codesandbox: string | null, readonly name: string | null, readonly phone: string | null, readonly title: string | null, readonly shortBio: { readonly shortBio: string | null } | null, readonly image: { readonly gatsbyImage: import('gatsby-plugin-image').IGatsbyImageData | null } | null } | null, readonly allContentfulExperienceCompany: { readonly nodes: ReadonlyArray<{ readonly companyName: string | null, readonly startDate: string | null, readonly endDate: string | null, readonly city: string | null, readonly description: { readonly description: string | null } | null }> }, readonly allContentfulEducationSchool: { readonly nodes: ReadonlyArray<{ readonly schoolName: string | null, readonly startDate: string | null, readonly endDate: string | null, readonly description: { readonly description: string | null } | null }> }, readonly allContentfulInterests: { readonly nodes: ReadonlyArray<{ readonly interest: string | null }> } };
+type HomeQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null } | null } | null, readonly contentfulPerson: { readonly email: string | null, readonly github: string | null, readonly codesandbox: string | null, readonly name: string | null, readonly phone: string | null, readonly title: string | null, readonly shortBio: { readonly shortBio: string | null } | null, readonly image: { readonly gatsbyImage: import('gatsby-plugin-image').IGatsbyImageData | null } | null } | null, readonly allContentfulExperienceCompany: { readonly nodes: ReadonlyArray<{ readonly companyName: string | null, readonly startDate: string | null, readonly endDate: string | null, readonly city: string | null, readonly description: { readonly description: string | null } | null }> }, readonly allContentfulEducationSchool: { readonly nodes: ReadonlyArray<{ readonly schoolName: string | null, readonly startDate: string | null, readonly endDate: string | null, readonly description: { readonly raw: string | null } | null }> }, readonly allContentfulInterests: { readonly nodes: ReadonlyArray<{ readonly interest: string | null }> } };
 
 type MetaSeoQueryVariables = Exact<{ [key: string]: never; }>;
 

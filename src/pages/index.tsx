@@ -115,7 +115,7 @@ export const pageQuery = graphql`
         startDate
         endDate
         description {
-          description
+          raw
         }
       }
     }
